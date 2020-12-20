@@ -1,9 +1,11 @@
 Y:\vs_projects\ARWMIO\ARWMIO\ARWMIO\bin\Debug\ARWMIO.exe
-Y:\vs_projects\ARWMIO\ARWMIO\ARWMIO\bin\Debug\ARWMIO.pdb
 Y:\vs_projects\ARWMIO\ARWMIO\ARWMIO\obj\Debug\ARWMIO.csprojAssemblyReference.cache
 Y:\vs_projects\ARWMIO\ARWMIO\ARWMIO\obj\Debug\ARWMIO.formMain.resources
 Y:\vs_projects\ARWMIO\ARWMIO\ARWMIO\obj\Debug\ARWMIO.Properties.Resources.resources
 Y:\vs_projects\ARWMIO\ARWMIO\ARWMIO\obj\Debug\ARWMIO.csproj.GenerateResource.cache
 Y:\vs_projects\ARWMIO\ARWMIO\ARWMIO\obj\Debug\ARWMIO.csproj.CoreCompileInputs.cache
 Y:\vs_projects\ARWMIO\ARWMIO\ARWMIO\obj\Debug\ARWMIO.exe
-Y:\vs_projects\ARWMIO\ARWMIO\ARWMIO\obj\Debug\ARWMIO.pdb
+Y:\vs_projects\ARWMIO\ARWMIO\ARWMIO\bin\Debug\NAudio.dll
+Y:\vs_projects\ARWMIO\ARWMIO\ARWMIO\bin\Debug\NAudio.xml
+Y:\vs_projects\ARWMIO\ARWMIO\ARWMIO\obj\Debug\ARWMIO.csproj.CopyComplete
+Y:\vs_projects\ARWMIO\ARWMIO\ARWMIO\bin\Debug\ARWMIO.exe.config

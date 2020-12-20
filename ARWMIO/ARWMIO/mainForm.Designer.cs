@@ -51,6 +51,9 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deviceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wASAPIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.playStopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tbInputID = new System.Windows.Forms.TextBox();
             this.tbOutputID = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -62,9 +65,6 @@
             this.tbVolume = new System.Windows.Forms.TextBox();
             this.tbLatency = new System.Windows.Forms.TextBox();
             this.tbID = new System.Windows.Forms.TextBox();
-            this.playStopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deviceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.wASAPIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dsList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtIOSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsIOSource)).BeginInit();
@@ -139,7 +139,8 @@
             // 
             // dataGridView1
             // 
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -205,15 +206,16 @@
             this.lbInputDevice.Name = "lbInputDevice";
             this.lbInputDevice.Size = new System.Drawing.Size(405, 251);
             this.lbInputDevice.TabIndex = 13;
+            this.lbInputDevice.SelectedIndexChanged += new System.EventHandler(this.lbInputDevice_SelectedIndexChanged);
             // 
             // lbOutputDevice
             // 
-            this.lbOutputDevice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lbOutputDevice.FormattingEnabled = true;
             this.lbOutputDevice.Location = new System.Drawing.Point(570, 27);
             this.lbOutputDevice.Name = "lbOutputDevice";
             this.lbOutputDevice.Size = new System.Drawing.Size(402, 251);
             this.lbOutputDevice.TabIndex = 14;
+            this.lbOutputDevice.SelectedIndexChanged += new System.EventHandler(this.lbOutputDevice_SelectedIndexChanged);
             // 
             // menu
             // 
@@ -245,14 +247,36 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(95, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
+            // deviceToolStripMenuItem
+            // 
+            this.deviceToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.wASAPIToolStripMenuItem});
+            this.deviceToolStripMenuItem.Name = "deviceToolStripMenuItem";
+            this.deviceToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.deviceToolStripMenuItem.Text = "Device";
+            // 
+            // wASAPIToolStripMenuItem
+            // 
+            this.wASAPIToolStripMenuItem.Name = "wASAPIToolStripMenuItem";
+            this.wASAPIToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.wASAPIToolStripMenuItem.Text = "WASAPI";
+            this.wASAPIToolStripMenuItem.Click += new System.EventHandler(this.wASAPIToolStripMenuItem_Click);
+            // 
+            // playStopToolStripMenuItem
+            // 
+            this.playStopToolStripMenuItem.Name = "playStopToolStripMenuItem";
+            this.playStopToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F12;
+            this.playStopToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
+            this.playStopToolStripMenuItem.Text = "Play/Stop";
+            this.playStopToolStripMenuItem.Click += new System.EventHandler(this.playStopToolStripMenuItem_Click);
+            // 
             // tbInputID
             // 
-            this.tbInputID.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbInputID.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bsIOSource, "inputID", true));
             this.tbInputID.Location = new System.Drawing.Point(12, 284);
             this.tbInputID.Name = "tbInputID";
             this.tbInputID.Size = new System.Drawing.Size(405, 20);
@@ -260,8 +284,7 @@
             // 
             // tbOutputID
             // 
-            this.tbOutputID.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbOutputID.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bsIOSource, "outputID", true));
             this.tbOutputID.Location = new System.Drawing.Point(570, 284);
             this.tbOutputID.Name = "tbOutputID";
             this.tbOutputID.Size = new System.Drawing.Size(402, 20);
@@ -269,7 +292,6 @@
             // 
             // label3
             // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(425, 188);
             this.label3.Name = "label3";
@@ -279,7 +301,7 @@
             // 
             // tbPitch
             // 
-            this.tbPitch.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.tbPitch.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bsIOSource, "pitch", true));
             this.tbPitch.Location = new System.Drawing.Point(428, 204);
             this.tbPitch.Name = "tbPitch";
             this.tbPitch.Size = new System.Drawing.Size(126, 20);
@@ -287,7 +309,6 @@
             // 
             // label2
             // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(425, 134);
             this.label2.Name = "label2";
@@ -297,7 +318,7 @@
             // 
             // tbPanning
             // 
-            this.tbPanning.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.tbPanning.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bsIOSource, "panning", true));
             this.tbPanning.Location = new System.Drawing.Point(428, 150);
             this.tbPanning.Name = "tbPanning";
             this.tbPanning.Size = new System.Drawing.Size(126, 20);
@@ -305,7 +326,6 @@
             // 
             // lblVolume
             // 
-            this.lblVolume.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblVolume.AutoSize = true;
             this.lblVolume.Location = new System.Drawing.Point(425, 80);
             this.lblVolume.Name = "lblVolume";
@@ -315,7 +335,6 @@
             // 
             // label1
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(425, 27);
             this.label1.Name = "label1";
@@ -325,7 +344,7 @@
             // 
             // tbVolume
             // 
-            this.tbVolume.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.tbVolume.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bsIOSource, "volume", true));
             this.tbVolume.Location = new System.Drawing.Point(428, 96);
             this.tbVolume.Name = "tbVolume";
             this.tbVolume.Size = new System.Drawing.Size(126, 20);
@@ -333,7 +352,7 @@
             // 
             // tbLatency
             // 
-            this.tbLatency.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.tbLatency.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bsIOSource, "latency", true));
             this.tbLatency.Location = new System.Drawing.Point(428, 46);
             this.tbLatency.Name = "tbLatency";
             this.tbLatency.Size = new System.Drawing.Size(126, 20);
@@ -348,29 +367,6 @@
             this.tbID.Name = "tbID";
             this.tbID.Size = new System.Drawing.Size(960, 20);
             this.tbID.TabIndex = 30;
-            // 
-            // playStopToolStripMenuItem
-            // 
-            this.playStopToolStripMenuItem.Name = "playStopToolStripMenuItem";
-            this.playStopToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F12;
-            this.playStopToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
-            this.playStopToolStripMenuItem.Text = "Play/Stop";
-            this.playStopToolStripMenuItem.Click += new System.EventHandler(this.playStopToolStripMenuItem_Click);
-            // 
-            // deviceToolStripMenuItem
-            // 
-            this.deviceToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.wASAPIToolStripMenuItem});
-            this.deviceToolStripMenuItem.Name = "deviceToolStripMenuItem";
-            this.deviceToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
-            this.deviceToolStripMenuItem.Text = "Device";
-            // 
-            // wASAPIToolStripMenuItem
-            // 
-            this.wASAPIToolStripMenuItem.Name = "wASAPIToolStripMenuItem";
-            this.wASAPIToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.wASAPIToolStripMenuItem.Text = "WASAPI";
-            this.wASAPIToolStripMenuItem.Click += new System.EventHandler(this.wASAPIToolStripMenuItem_Click);
             // 
             // formMain
             // 

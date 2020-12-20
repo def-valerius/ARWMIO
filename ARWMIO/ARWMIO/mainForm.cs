@@ -15,5 +15,20 @@ namespace ARWMIO
         {
             InitializeComponent();
         }
+
+        private void playStopToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void wASAPIToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -6,11 +6,15 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace ARWMIO
 {
     public partial class formMain : Form
     {
+        private bool blnPlaying = false;
+        private wPlay[] wPlayArr = null;
+
         public formMain()
         {
             InitializeComponent();
@@ -18,7 +22,52 @@ namespace ARWMIO
 
         private void playStopToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!blnPlaying)
+            {
+                blnPlaying = true;
 
+                DataTable dtIOSource = new DataTable();
+                dtIOSource = dsList.Tables["IOSource"];
+
+                Thread[] threads = new Thread[dtIOSource.Rows.Count];
+                wPlayArr = new wPlay[dtIOSource.Rows.Count];
+
+                int i = 0;
+                foreach (DataRow row in dtIOSource.Rows)
+                {
+                    wPlayArr[i] = new wPlay();
+                    wPlayArr[i].setValues(row["inputID"].ToString(),
+                                          row["outputID"].ToString(),
+                                          (float)row["pitch"],
+                                          (int)row["latency"],
+                                          (float)row["panning"],
+                                          (float)row["volume"]                                            
+                                         );
+                    threads[i] = new Thread(new ThreadStart(wPlayArr[i].wasapiPlay));
+                    threads[i].Start();
+
+                    i += 1;
+                }
+                
+            }
+            else
+            {
+                DataTable dtIOSource = new DataTable();
+                dtIOSource = dsList.Tables["IOSource"];
+
+                int i = 0;
+                foreach (DataRow row in dtIOSource.Rows)
+                {
+                    if (wPlayArr[i] != null)
+                    {
+                        wPlayArr[i].wasapiStop();
+                    }
+
+                    i += 1;
+                }
+
+                blnPlaying = false;
+            }
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)

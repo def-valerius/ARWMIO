@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formMain));
             this.dsList = new System.Data.DataSet();
             this.dtIOSource = new System.Data.DataTable();
             this.col_InputID = new System.Data.DataColumn();
@@ -49,6 +50,9 @@
             this.lbOutputDevice = new System.Windows.Forms.ListBox();
             this.menu = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deviceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -65,9 +69,7 @@
             this.tbVolume = new System.Windows.Forms.TextBox();
             this.tbLatency = new System.Windows.Forms.TextBox();
             this.tbID = new System.Windows.Forms.TextBox();
-            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnAdd = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dsList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtIOSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsIOSource)).BeginInit();
@@ -207,7 +209,7 @@
             this.lbInputDevice.FormattingEnabled = true;
             this.lbInputDevice.Location = new System.Drawing.Point(12, 27);
             this.lbInputDevice.Name = "lbInputDevice";
-            this.lbInputDevice.Size = new System.Drawing.Size(405, 251);
+            this.lbInputDevice.Size = new System.Drawing.Size(402, 251);
             this.lbInputDevice.TabIndex = 13;
             this.lbInputDevice.SelectedIndexChanged += new System.EventHandler(this.lbInputDevice_SelectedIndexChanged);
             // 
@@ -244,16 +246,34 @@
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
+            // newToolStripMenuItem
+            // 
+            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.newToolStripMenuItem.Text = "New";
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Text = "Open";
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.saveToolStripMenuItem.Text = "Save";
+            // 
             // testToolStripMenuItem
             // 
             this.testToolStripMenuItem.Name = "testToolStripMenuItem";
-            this.testToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.testToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.testToolStripMenuItem.Text = "Test";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -268,7 +288,7 @@
             // wASAPIToolStripMenuItem
             // 
             this.wASAPIToolStripMenuItem.Name = "wASAPIToolStripMenuItem";
-            this.wASAPIToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.wASAPIToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.wASAPIToolStripMenuItem.Text = "WASAPI";
             this.wASAPIToolStripMenuItem.Click += new System.EventHandler(this.wASAPIToolStripMenuItem_Click);
             // 
@@ -285,7 +305,7 @@
             this.tbInputID.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bsIOSource, "inputID", true));
             this.tbInputID.Location = new System.Drawing.Point(12, 284);
             this.tbInputID.Name = "tbInputID";
-            this.tbInputID.Size = new System.Drawing.Size(405, 20);
+            this.tbInputID.Size = new System.Drawing.Size(402, 20);
             this.tbInputID.TabIndex = 20;
             // 
             // tbOutputID
@@ -312,6 +332,7 @@
             this.tbPitch.Name = "tbPitch";
             this.tbPitch.Size = new System.Drawing.Size(126, 20);
             this.tbPitch.TabIndex = 28;
+            this.tbPitch.Text = "1";
             // 
             // label2
             // 
@@ -329,6 +350,7 @@
             this.tbPanning.Name = "tbPanning";
             this.tbPanning.Size = new System.Drawing.Size(126, 20);
             this.tbPanning.TabIndex = 26;
+            this.tbPanning.Text = "0";
             // 
             // lblVolume
             // 
@@ -355,6 +377,7 @@
             this.tbVolume.Name = "tbVolume";
             this.tbVolume.Size = new System.Drawing.Size(126, 20);
             this.tbVolume.TabIndex = 23;
+            this.tbVolume.Text = "1";
             // 
             // tbLatency
             // 
@@ -363,6 +386,7 @@
             this.tbLatency.Name = "tbLatency";
             this.tbLatency.Size = new System.Drawing.Size(126, 20);
             this.tbLatency.TabIndex = 22;
+            this.tbLatency.Text = "0";
             // 
             // tbID
             // 
@@ -374,29 +398,22 @@
             this.tbID.Size = new System.Drawing.Size(960, 20);
             this.tbID.TabIndex = 30;
             // 
-            // newToolStripMenuItem
+            // btnAdd
             // 
-            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.newToolStripMenuItem.Text = "New";
-            // 
-            // saveToolStripMenuItem
-            // 
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.saveToolStripMenuItem.Text = "Save";
-            // 
-            // openToolStripMenuItem
-            // 
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.openToolStripMenuItem.Text = "Open";
+            this.btnAdd.Location = new System.Drawing.Point(12, 347);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(75, 23);
+            this.btnAdd.TabIndex = 31;
+            this.btnAdd.Text = "Add";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // formMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 661);
+            this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.tbID);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.tbPitch);
@@ -412,9 +429,11 @@
             this.Controls.Add(this.lbInputDevice);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.menu);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menu;
             this.Name = "formMain";
             this.Text = "ARWMI";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.formMain_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.dsList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtIOSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsIOSource)).EndInit();
@@ -467,6 +486,7 @@
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.Button btnAdd;
     }
 }
 

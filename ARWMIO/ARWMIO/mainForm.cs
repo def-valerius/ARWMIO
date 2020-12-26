@@ -12,6 +12,8 @@ namespace ARWMIO
 {
     public partial class formMain : Form
     {
+        public int intNumberOfSources;
+
         private bool blnPlaying = false;
         private wPlay[] wPlayArr = null;
 
@@ -31,7 +33,7 @@ namespace ARWMIO
 
                 Thread[] threads = new Thread[dtIOSource.Rows.Count];
                 wPlayArr = new wPlay[dtIOSource.Rows.Count];
-
+                
                 int i = 0;
                 foreach (DataRow row in dtIOSource.Rows)
                 {
@@ -48,25 +50,25 @@ namespace ARWMIO
 
                     i += 1;
                 }
-                
+
+                intNumberOfSources = i;
+
+                playStopToolStripMenuItem.Text += "(Now Playing)";
             }
             else
             {
-                DataTable dtIOSource = new DataTable();
-                dtIOSource = dsList.Tables["IOSource"];
-
-                int i = 0;
-                foreach (DataRow row in dtIOSource.Rows)
+                for (int i = 0; i < intNumberOfSources; i++)
                 {
                     if (wPlayArr[i] != null)
                     {
                         wPlayArr[i].wasapiStop();
                     }
 
-                    i += 1;
                 }
 
                 blnPlaying = false;
+
+                playStopToolStripMenuItem.Text = "Play / Stop";
             }
         }
 
@@ -115,5 +117,36 @@ namespace ARWMIO
             tbOutputID.Text = lbOutputDevice.Text.Substring(lbOutputDevice.Text.IndexOf("?") + 1);
         }
 
+        private void formMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (blnPlaying)
+            {
+                for (int i = 0; i < intNumberOfSources; i++)
+                {
+                    if (wPlayArr[i] != null)
+                    {
+                        wPlayArr[i].wasapiStop();
+                    }
+                }
+            }
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            //bsIOSource.AddNew();
+            
+            DataTable dtIOSource = new DataTable();
+            dtIOSource = dsList.Tables["IOSource"];
+            DataRow row = dtIOSource.Rows.Add(tbInputID.Text, 
+                                              tbOutputID.Text,
+                                              Int32.Parse(tbLatency.Text), 
+                                              Convert.ToSingle(tbVolume.Text),
+                                              Convert.ToSingle(tbPanning.Text),
+                                              Convert.ToSingle(tbPitch.Text)
+                                             );
+            //row["inputID"] = tbInputID.Text;
+            
+            
+        }
     }
 }

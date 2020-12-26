@@ -134,15 +134,24 @@ namespace ARWMIO
         private void btnAdd_Click(object sender, EventArgs e)
         {
             //bsIOSource.AddNew();
-            
+            int intLatencyBuff = 0;
+            float fVolumeBuff = 1f;
+            float fPanningBuff = 0f;
+            float fPitchBuff = 1f;
+
+            if (tbLatency.Text != "") { intLatencyBuff = Int32.Parse(tbLatency.Text); }
+            if (tbVolume.Text != "") { fVolumeBuff = Convert.ToSingle(tbVolume.Text); }
+            if (tbPanning.Text != "") { fPanningBuff = Convert.ToSingle(tbPanning.Text); }
+            if (tbPitch.Text != "") { fPitchBuff = Convert.ToSingle(tbPitch.Text); }
+
             DataTable dtIOSource = new DataTable();
             dtIOSource = dsList.Tables["IOSource"];
             DataRow row = dtIOSource.Rows.Add(tbInputID.Text, 
                                               tbOutputID.Text,
-                                              Int32.Parse(tbLatency.Text), 
-                                              Convert.ToSingle(tbVolume.Text),
-                                              Convert.ToSingle(tbPanning.Text),
-                                              Convert.ToSingle(tbPitch.Text)
+                                              intLatencyBuff,
+                                              fVolumeBuff,
+                                              fPanningBuff,
+                                              fPitchBuff
                                              );
             //row["inputID"] = tbInputID.Text;
             

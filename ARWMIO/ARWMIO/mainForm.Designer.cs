@@ -162,7 +162,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(960, 262);
-            this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.TabIndex = 10;
             // 
             // inputIDDataGridViewTextBoxColumn
             // 
@@ -212,7 +212,7 @@
             this.lbInputDevice.Location = new System.Drawing.Point(12, 27);
             this.lbInputDevice.Name = "lbInputDevice";
             this.lbInputDevice.Size = new System.Drawing.Size(402, 251);
-            this.lbInputDevice.TabIndex = 13;
+            this.lbInputDevice.TabIndex = 1;
             this.lbInputDevice.SelectedIndexChanged += new System.EventHandler(this.lbInputDevice_SelectedIndexChanged);
             // 
             // lbOutputDevice
@@ -221,7 +221,7 @@
             this.lbOutputDevice.Location = new System.Drawing.Point(570, 27);
             this.lbOutputDevice.Name = "lbOutputDevice";
             this.lbOutputDevice.Size = new System.Drawing.Size(402, 251);
-            this.lbOutputDevice.TabIndex = 14;
+            this.lbOutputDevice.TabIndex = 2;
             this.lbOutputDevice.SelectedIndexChanged += new System.EventHandler(this.lbOutputDevice_SelectedIndexChanged);
             // 
             // menu
@@ -251,31 +251,31 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.newToolStripMenuItem.Text = "New";
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openToolStripMenuItem.Text = "Open";
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveToolStripMenuItem.Text = "Save";
             // 
             // testToolStripMenuItem
             // 
             this.testToolStripMenuItem.Name = "testToolStripMenuItem";
-            this.testToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.testToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.testToolStripMenuItem.Text = "Test";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -333,7 +333,7 @@
             this.tbPitch.Location = new System.Drawing.Point(428, 204);
             this.tbPitch.Name = "tbPitch";
             this.tbPitch.Size = new System.Drawing.Size(126, 20);
-            this.tbPitch.TabIndex = 28;
+            this.tbPitch.TabIndex = 6;
             this.tbPitch.Text = "1";
             // 
             // label2
@@ -351,7 +351,7 @@
             this.tbPanning.Location = new System.Drawing.Point(428, 150);
             this.tbPanning.Name = "tbPanning";
             this.tbPanning.Size = new System.Drawing.Size(126, 20);
-            this.tbPanning.TabIndex = 26;
+            this.tbPanning.TabIndex = 5;
             this.tbPanning.Text = "0";
             // 
             // lblVolume
@@ -378,7 +378,7 @@
             this.tbVolume.Location = new System.Drawing.Point(428, 96);
             this.tbVolume.Name = "tbVolume";
             this.tbVolume.Size = new System.Drawing.Size(126, 20);
-            this.tbVolume.TabIndex = 23;
+            this.tbVolume.TabIndex = 4;
             this.tbVolume.Text = "1";
             // 
             // tbLatency
@@ -387,7 +387,7 @@
             this.tbLatency.Location = new System.Drawing.Point(428, 46);
             this.tbLatency.Name = "tbLatency";
             this.tbLatency.Size = new System.Drawing.Size(126, 20);
-            this.tbLatency.TabIndex = 22;
+            this.tbLatency.TabIndex = 3;
             this.tbLatency.Text = "0";
             // 
             // tbID
@@ -405,7 +405,7 @@
             this.btnAdd.Location = new System.Drawing.Point(12, 347);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
-            this.btnAdd.TabIndex = 31;
+            this.btnAdd.TabIndex = 7;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);

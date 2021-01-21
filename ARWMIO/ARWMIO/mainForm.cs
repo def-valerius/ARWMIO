@@ -157,5 +157,22 @@ namespace ARWMIO
             
             
         }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                dsList.WriteXml(saveFileDialog1.FileName);
+            }
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                dsList.ReadXml(openFileDialog1.FileName);
+            }
+            
+        }
     }
 }

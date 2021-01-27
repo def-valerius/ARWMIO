@@ -7,12 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
+using System.IO;
 
 namespace ARWMIO
 {
     public partial class formMain : Form
     {
         public int intNumberOfSources;
+        public bool blnAutoStart = false;
 
         private bool blnPlaying = false;
         private wPlay[] wPlayArr = null;
@@ -20,6 +22,16 @@ namespace ARWMIO
         public formMain()
         {
             InitializeComponent();
+        }
+
+        public void setParameters(bool pAutoStart, string pFileName)
+        {
+            blnAutoStart = pAutoStart;
+            if (File.Exists(pFileName))
+            {
+                dsList.ReadXml(pFileName);
+            }
+            
         }
 
         private void playStopToolStripMenuItem_Click(object sender, EventArgs e)
@@ -43,11 +55,11 @@ namespace ARWMIO
                                           (float)row["pitch"],
                                           (int)row["latency"],
                                           (float)row["panning"],
-                                          (float)row["volume"]                                            
+                                          (float)row["volume"]
                                          );
                     threads[i] = new Thread(new ThreadStart(wPlayArr[i].wasapiPlay));
                     threads[i].Start();
-
+                    
                     i += 1;
                 }
 
@@ -173,6 +185,14 @@ namespace ARWMIO
                 dsList.ReadXml(openFileDialog1.FileName);
             }
             
+        }
+
+        private void formMain_Load(object sender, EventArgs e)
+        {
+            if (blnAutoStart)
+            {
+                playStopToolStripMenuItem.PerformClick(); // ok?
+            }
         }
     }
 }

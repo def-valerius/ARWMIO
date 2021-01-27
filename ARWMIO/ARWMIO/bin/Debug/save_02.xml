@@ -1,0 +1,27 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <IOSource>
+    <inputID>{0.0.1.00000000}.{505ac2be-3b5f-4eac-9da0-ea992238a091}</inputID>
+    <outputID>{0.0.0.00000000}.{2ad5325a-2a95-4e15-ae11-3c604c915ff4}</outputID>
+    <latency>0</latency>
+    <volume>0.5</volume>
+    <panning>0</panning>
+    <pitch>0.995</pitch>
+  </IOSource>
+  <IOSource>
+    <inputID>{0.0.1.00000000}.{505ac2be-3b5f-4eac-9da0-ea992238a091}</inputID>
+    <outputID>{0.0.0.00000000}.{2ad5325a-2a95-4e15-ae11-3c604c915ff4}</outputID>
+    <latency>0</latency>
+    <volume>0.5</volume>
+    <panning>0</panning>
+    <pitch>1</pitch>
+  </IOSource>
+  <IOSource>
+    <inputID>{0.0.1.00000000}.{505ac2be-3b5f-4eac-9da0-ea992238a091}</inputID>
+    <outputID>{0.0.0.00000000}.{2ad5325a-2a95-4e15-ae11-3c604c915ff4}</outputID>
+    <latency>0</latency>
+    <volume>0.5</volume>
+    <panning>0</panning>
+    <pitch>1.005</pitch>
+  </IOSource>
+</NewDataSet>

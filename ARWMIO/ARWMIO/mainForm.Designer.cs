@@ -72,6 +72,7 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.btnDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dsList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtIOSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsIOSource)).BeginInit();
@@ -162,7 +163,7 @@
             this.dataGridView1.DataSource = this.bsIOSource;
             this.dataGridView1.Location = new System.Drawing.Point(12, 387);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dataGridView1.Size = new System.Drawing.Size(960, 262);
             this.dataGridView1.TabIndex = 10;
             // 
@@ -424,11 +425,22 @@
             this.openFileDialog1.DefaultExt = "xml";
             this.openFileDialog1.Filter = "XML Files (*xml)|*.xml";
             // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(93, 347);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnDelete.TabIndex = 31;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // formMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 661);
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.tbID);
             this.Controls.Add(this.label3);
@@ -506,6 +518,7 @@
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button btnDelete;
     }
 }
 

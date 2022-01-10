@@ -49,18 +49,21 @@ namespace ARWMIO
                 int i = 0;
                 foreach (DataRow row in dtIOSource.Rows)
                 {
-                    wPlayArr[i] = new wPlay();
-                    wPlayArr[i].setValues(row["inputID"].ToString(),
-                                          row["outputID"].ToString(),
-                                          (float)row["pitch"],
-                                          (int)row["latency"],
-                                          (float)row["panning"],
-                                          (float)row["volume"]
-                                         );
-                    threads[i] = new Thread(new ThreadStart(wPlayArr[i].wasapiPlay));
-                    threads[i].Start();
-                    
-                    i += 1;
+                    if ((row["inputID"].ToString() != "") & (row["outputID"].ToString() != ""))
+                    {
+                        wPlayArr[i] = new wPlay();
+                        wPlayArr[i].setValues(row["inputID"].ToString(),
+                                              row["outputID"].ToString(),
+                                              (float)row["pitch"],
+                                              (int)row["latency"],
+                                              (float)row["panning"],
+                                              (float)row["volume"]
+                                             );
+                        threads[i] = new Thread(new ThreadStart(wPlayArr[i].wasapiPlay));
+                        threads[i].Start();
+
+                        i += 1;
+                    }
                 }
 
                 intNumberOfSources = i;
@@ -143,6 +146,7 @@ namespace ARWMIO
             }
         }
 
+        #region add, delete buttons
         private void btnAdd_Click(object sender, EventArgs e)
         {
             //bsIOSource.AddNew();
@@ -169,7 +173,19 @@ namespace ARWMIO
             
             
         }
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentRow != null)
+            {
+                DataTable dtIOSource = new DataTable();
+                dtIOSource = dsList.Tables["IOSource"];
+                dtIOSource.Rows.RemoveAt(dataGridView1.CurrentRow.Index);
+            }
 
+        }
+        #endregion
+
+        #region toolstrip buttons
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
@@ -194,5 +210,7 @@ namespace ARWMIO
                 playStopToolStripMenuItem.PerformClick(); // ok?
             }
         }
+        #endregion
+
     }
 }

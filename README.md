@@ -7,7 +7,7 @@ Or download all files from "ARWMIO/ARWMIO/bin/Debug" (debug version that may be 
 
 ## Example
 ![example](example.png)
-### How to use
+## How to use
   1. Click Device -> WASAPI to display all inputs and outputs.
   2. Click "Add" to add line with current input, output and other parameters.
   3. Press F12 or "Play / Stop" to start playing sound from input to output.

@@ -16,21 +16,32 @@ namespace ARWMIO
         public MMDevice wOutput;
 
         public float fPitch;
-        public int iLatency;
+        public int iDelay;
+        public int iDelaySample;
         public float fPanning;
         public float fVolume;
         public string strInputDeviceID;
         public string strOutputDeviceID;
 
+        public TimeSpan timespanTest; // TEST
+        public WaveBuffer publicWaveBuffer = new WaveBuffer(20000);
+        public byte[] byteArr;
+        public int intBuffCnt;
+        public int byteBuffCnt;
+        public int floatBuffCnt;
+        public int shortBuffCnt;
+
         private WasapiOut wOut;
-        private WasapiCapture wCapture;
+        public WasapiCapture wCapture;
+        //private BufferedWaveProvider buffWaveProv;
         private BufferedWaveProvider buffWaveProv;
-        public void setValues(string pInputID, string pOutputID, float pfPitch, int piLatency, float pfPanning, float pfVolume)
+        public void setValues(string pInputID, string pOutputID, float pfPitch, int piDelay, float pfPanning, float pfVolume, int piDelay_smpl)
         {
             strInputDeviceID = pInputID;
             strOutputDeviceID = pOutputID;
             fPitch = pfPitch;
-            iLatency = piLatency;
+            iDelay = piDelay;
+            iDelaySample = piDelay_smpl;
             fPanning = pfPanning;
             fVolume = pfVolume;
         }
@@ -42,10 +53,25 @@ namespace ARWMIO
             SmbPitchShiftingSampleProvider smbPitchSampleProv1;
             OffsetSampleProvider offsetSampleProv1;
             PanningSampleProvider panSampleProv1;
+            DateTime dtTest = DateTime.Now;
 
             void funcForBuff(object sender, WaveInEventArgs waveInEventArgs)
             {
                 buffWaveProv.AddSamples(waveInEventArgs.Buffer, 0, waveInEventArgs.BytesRecorded);
+
+                timespanTest = DateTime.Now - dtTest; // TEST
+                dtTest = DateTime.Now;
+
+                //publicWaveBuffer = new WaveBuffer(waveInEventArgs.Buffer);
+                byteArr = new byte[waveInEventArgs.BytesRecorded];
+                byteArr = waveInEventArgs.Buffer;
+
+                intBuffCnt = publicWaveBuffer.numberOfBytes;
+                //intBuffCnt = waveInEventArgs.BytesRecorded;
+                byteBuffCnt = publicWaveBuffer.ByteBufferCount;
+                floatBuffCnt = publicWaveBuffer.FloatBufferCount;
+                shortBuffCnt = publicWaveBuffer.ShortBufferCount;
+
             }
 
             var enumerator = new NAudio.CoreAudioApi.MMDeviceEnumerator();
@@ -64,7 +90,8 @@ namespace ARWMIO
             smbPitchSampleProv1.PitchFactor = fPitch;
 
             offsetSampleProv1 = new OffsetSampleProvider(smbPitchSampleProv1);
-            offsetSampleProv1.DelayBy = new TimeSpan(0, 0, 0, 0, iLatency);
+            offsetSampleProv1.DelayBy = new TimeSpan(0, 0, 0, 0, iDelay);
+            offsetSampleProv1.DelayBySamples = iDelaySample;
 
             panSampleProv1 = new PanningSampleProvider(offsetSampleProv1.ToMono(1f, 1f));
             panSampleProv1.Pan = fPanning;

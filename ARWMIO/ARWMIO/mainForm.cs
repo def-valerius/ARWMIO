@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Threading;
 using System.IO;
+using System.Globalization;
 
 namespace ARWMIO
 {
@@ -55,16 +56,21 @@ namespace ARWMIO
                         wPlayArr[i].setValues(row["inputID"].ToString(),
                                               row["outputID"].ToString(),
                                               (float)row["pitch"],
-                                              (int)row["latency"],
+                                              (int)row["delay"],
                                               (float)row["panning"],
-                                              (float)row["volume"]
+                                              (float)row["volume"],
+                                              (int)row["delay_smpl"]
                                              );
                         threads[i] = new Thread(new ThreadStart(wPlayArr[i].wasapiPlay));
-                        threads[i].Start();
+                        threads[i].Priority = ThreadPriority.Highest;
+                        //threads[i].Start(); // ?
 
                         i += 1;
                     }
                 }
+                for (int j = 0; j < i; j++)
+                    threads[j].Start(); // ?
+
 
                 intNumberOfSources = i;
 
@@ -150,12 +156,14 @@ namespace ARWMIO
         private void btnAdd_Click(object sender, EventArgs e)
         {
             //bsIOSource.AddNew();
-            int intLatencyBuff = 0;
+            int intDelayBuff = 0;
+            int intDelaySmplBuff = 0;
             float fVolumeBuff = 1f;
             float fPanningBuff = 0f;
             float fPitchBuff = 1f;
 
-            if (tbLatency.Text != "") { intLatencyBuff = Int32.Parse(tbLatency.Text); }
+            if (tbDelay_ms.Text != "") { intDelayBuff = Int32.Parse(tbDelay_ms.Text); }
+            if (tbDelay_smpl.Text != "") { intDelaySmplBuff = Int32.Parse(tbDelay_smpl.Text); }
             if (tbVolume.Text != "") { fVolumeBuff = Convert.ToSingle(tbVolume.Text); }
             if (tbPanning.Text != "") { fPanningBuff = Convert.ToSingle(tbPanning.Text); }
             if (tbPitch.Text != "") { fPitchBuff = Convert.ToSingle(tbPitch.Text); }
@@ -164,10 +172,11 @@ namespace ARWMIO
             dtIOSource = dsList.Tables["IOSource"];
             DataRow row = dtIOSource.Rows.Add(tbInputID.Text, 
                                               tbOutputID.Text,
-                                              intLatencyBuff,
+                                              intDelayBuff,
                                               fVolumeBuff,
                                               fPanningBuff,
-                                              fPitchBuff
+                                              fPitchBuff,
+                                              intDelaySmplBuff
                                              );
             //row["inputID"] = tbInputID.Text;
             
@@ -212,5 +221,155 @@ namespace ARWMIO
         }
         #endregion
 
+        #region volume meter test
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (!timer10ms.Enabled)
+            {
+                timer10ms.Start();
+            }
+            else
+            {
+                timer10ms.Stop();
+            }
+            
+            if ((wPlayArr[0] != null) & false)
+            {
+                
+                textBox1.Text = wPlayArr[0].timespanTest.TotalMilliseconds.ToString() + "; buffs:";
+                textBox1.Text += wPlayArr[0].publicWaveBuffer.ByteBufferCount.ToString() + ", ";
+                textBox1.Text += wPlayArr[0].publicWaveBuffer.FloatBufferCount.ToString() + ", ";
+                textBox1.Text += wPlayArr[0].publicWaveBuffer.IntBufferCount.ToString() + ", ";
+                textBox1.Text += wPlayArr[0].publicWaveBuffer.ShortBufferCount.ToString() + "; ";
+                textBox1.Text += wPlayArr[0].publicWaveBuffer.numberOfBytes.ToString() + "; ";
+
+                /*
+                textBox1.Text = wPlayArr[0].intBuffCnt.ToString() + ", ";
+                textBox1.Text += wPlayArr[0].floatBuffCnt.ToString() + ", ";
+                textBox1.Text += wPlayArr[0].shortBuffCnt.ToString() + ", ";
+                textBox1.Text += wPlayArr[0].byteBuffCnt.ToString() + ", ";
+                textBox1.Text += wPlayArr[0].publicWaveBuffer.;
+                */
+                /*
+                textBox1.Text += wPlayArr[0].buffWaveProv.BufferLength.ToString();
+
+                byte[] byteArr = new byte[wPlayArr[0].buffWaveProv.BufferLength];
+                int arrLen = wPlayArr[0].buffWaveProv.Read(byteArr, 0, wPlayArr[0].buffWaveProv.BufferLength);
+                
+                textBox1.Text += "[0]=" + byteArr[0].ToString();
+                */
+                textBox1.Text += wPlayArr[0].wCapture.WaveFormat.ToString() + ", ";
+                textBox1.Text += wPlayArr[0].wCapture.WaveFormat.SampleRate.ToString() + ", ";
+                textBox1.Text += wPlayArr[0].wCapture.WaveFormat.BitsPerSample.ToString() + ", ";
+                textBox1.Text += "[0]=" + wPlayArr[0].byteArr[0].ToString() + ", ";
+                textBox1.Text += wPlayArr[0].byteArr.Length.ToString();
+
+                // 32 float
+                if ((wPlayArr[0].byteArr.Length % 4) == 0)
+                {
+                    float[] floatArr = new float[wPlayArr[0].byteArr.Length / 4];
+                    int j = 0;
+                    for (int i = 0; i < wPlayArr[0].byteArr.Length; i = i + 4)
+                    {
+                        floatArr[j] = System.BitConverter.ToSingle(wPlayArr[0].byteArr, i);
+                        j++;
+                    }
+
+                    float max = 0;
+                    for (int i = 0; i < floatArr.Length; i++)
+                    {
+                        var sample = floatArr[i];
+                        if (sample < 0) sample -= sample;
+                        if (sample > max) max = sample;
+                    }
+                    textBox1.Text += "; " + max.ToString();
+                }
+                
+
+                /*
+                float max = 0;
+                for (int i = 0; i < wPlayArr[0].publicWaveBuffer.ShortBufferCount / 4; i++)
+                {
+                    var sample = wPlayArr[0].publicWaveBuffer.ShortBuffer[i];
+
+                    // absolute value 
+                    //if (sample < 0) sample = -sample;
+                    if (sample < 0) sample = 0;
+                    // is this the max value?
+                    if (sample > max) max = sample;
+                }
+                textBox1.Text += "; " + max.ToString();
+                */
+
+            }
+
+        }
+        #endregion
+
+        private void timer10ms_Tick(object sender, EventArgs e)
+        {
+            DataTable dtIOSource = new DataTable();
+            dtIOSource = dsList.Tables["IOSource"];
+            int rowNum = 0;
+            foreach (DataRow row in dtIOSource.Rows)
+            {
+                if ((wPlayArr != null) & (wPlayArr[rowNum] != null) & (wPlayArr[rowNum].byteArr != null))
+                {
+                    if ((wPlayArr[rowNum].byteArr.Length % 4) == 0)
+                    {
+                        float[] floatArr = new float[wPlayArr[rowNum].byteArr.Length / 4];
+                        int j = 0;
+                        for (int i = 0; i < wPlayArr[rowNum].byteArr.Length; i = i + 4)
+                        {
+                            floatArr[j] = System.BitConverter.ToSingle(wPlayArr[rowNum].byteArr, i);
+                            j++;
+                        }
+
+                        float max = 0;
+                        for (int i = 0; i < floatArr.Length; i++)
+                        {
+                            var sample = floatArr[i];
+                            if (sample < 0) sample -= sample;
+                            if (sample > max) max = sample;
+                        }
+                        /*
+                        var vol = Math.Round(max, 2) * 100;
+                        int iVol = System.Convert.ToInt32(vol);
+                        row["volume_level"] = iVol.ToString();
+                        */
+                    }
+                }
+                rowNum += 1;
+            }
+
+            if ((wPlayArr != null) & (wPlayArr[0] != null) & (wPlayArr[0].byteArr != null))
+            {
+                if ((wPlayArr[0].byteArr.Length % 4) == 0)
+                {
+                    float[] floatArr = new float[wPlayArr[0].byteArr.Length / 4];
+                    int j = 0;
+                    for (int i = 0; i < wPlayArr[0].byteArr.Length; i = i + 4)
+                    {
+                        floatArr[j] = System.BitConverter.ToSingle(wPlayArr[0].byteArr, i);
+                        j++;
+                    }
+
+                    float max = 0;
+                    for (int i = 0; i < floatArr.Length; i++)
+                    {
+                        var sample = floatArr[i];
+                        if (sample < 0) sample -= sample;
+                        if (sample > max) max = sample;
+                    }
+                    var vol = Math.Round(max, 2) * 100;
+                    pbVolume.Value = System.Convert.ToInt32(vol);
+                }
+            }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

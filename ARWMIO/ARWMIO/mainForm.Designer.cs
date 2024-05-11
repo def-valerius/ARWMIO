@@ -38,8 +38,16 @@
             this.col_volume = new System.Data.DataColumn();
             this.col_panning = new System.Data.DataColumn();
             this.dataColumn1 = new System.Data.DataColumn();
+            this.dataColumn2 = new System.Data.DataColumn();
             this.bsIOSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.inputIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.outputIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.delay = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.delay_smpl = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.volumeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panningDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pitchDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lbInputDevice = new System.Windows.Forms.ListBox();
             this.lbOutputDevice = new System.Windows.Forms.ListBox();
             this.menu = new System.Windows.Forms.MenuStrip();
@@ -52,6 +60,7 @@
             this.deviceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wASAPIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.playStopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.graphsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tbInputID = new System.Windows.Forms.TextBox();
             this.tbOutputID = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -71,16 +80,10 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.pbVolume = new System.Windows.Forms.ProgressBar();
             this.timer10ms = new System.Windows.Forms.Timer(this.components);
-            this.dataColumn2 = new System.Data.DataColumn();
-            this.delay = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.delay_smpl = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblDelay_smpl = new System.Windows.Forms.Label();
             this.tbDelay_smpl = new System.Windows.Forms.TextBox();
-            this.pitchDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panningDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.volumeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.outputIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.inputIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cbStereoInput = new System.Windows.Forms.CheckBox();
+            this.equalizerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dsList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtIOSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsIOSource)).BeginInit();
@@ -149,6 +152,13 @@
             this.dataColumn1.DataType = typeof(float);
             this.dataColumn1.DefaultValue = 1F;
             // 
+            // dataColumn2
+            // 
+            this.dataColumn2.Caption = "delay (smpl.)";
+            this.dataColumn2.ColumnName = "delay_smpl";
+            this.dataColumn2.DataType = typeof(int);
+            this.dataColumn2.DefaultValue = 0;
+            // 
             // bsIOSource
             // 
             this.bsIOSource.DataMember = "IOSource";
@@ -176,7 +186,54 @@
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dataGridView1.Size = new System.Drawing.Size(963, 282);
             this.dataGridView1.TabIndex = 10;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // inputIDDataGridViewTextBoxColumn
+            // 
+            this.inputIDDataGridViewTextBoxColumn.DataPropertyName = "inputID";
+            this.inputIDDataGridViewTextBoxColumn.HeaderText = "inputID";
+            this.inputIDDataGridViewTextBoxColumn.Name = "inputIDDataGridViewTextBoxColumn";
+            this.inputIDDataGridViewTextBoxColumn.Width = 300;
+            // 
+            // outputIDDataGridViewTextBoxColumn
+            // 
+            this.outputIDDataGridViewTextBoxColumn.DataPropertyName = "outputID";
+            this.outputIDDataGridViewTextBoxColumn.HeaderText = "outputID";
+            this.outputIDDataGridViewTextBoxColumn.Name = "outputIDDataGridViewTextBoxColumn";
+            this.outputIDDataGridViewTextBoxColumn.Width = 300;
+            // 
+            // delay
+            // 
+            this.delay.DataPropertyName = "delay";
+            this.delay.HeaderText = "delay (ms)";
+            this.delay.Name = "delay";
+            this.delay.Width = 50;
+            // 
+            // delay_smpl
+            // 
+            this.delay_smpl.DataPropertyName = "delay_smpl";
+            this.delay_smpl.HeaderText = "delay (smpl.)";
+            this.delay_smpl.Name = "delay_smpl";
+            // 
+            // volumeDataGridViewTextBoxColumn
+            // 
+            this.volumeDataGridViewTextBoxColumn.DataPropertyName = "volume";
+            this.volumeDataGridViewTextBoxColumn.HeaderText = "volume";
+            this.volumeDataGridViewTextBoxColumn.Name = "volumeDataGridViewTextBoxColumn";
+            this.volumeDataGridViewTextBoxColumn.Width = 60;
+            // 
+            // panningDataGridViewTextBoxColumn
+            // 
+            this.panningDataGridViewTextBoxColumn.DataPropertyName = "panning";
+            this.panningDataGridViewTextBoxColumn.HeaderText = "panning";
+            this.panningDataGridViewTextBoxColumn.Name = "panningDataGridViewTextBoxColumn";
+            this.panningDataGridViewTextBoxColumn.Width = 60;
+            // 
+            // pitchDataGridViewTextBoxColumn
+            // 
+            this.pitchDataGridViewTextBoxColumn.DataPropertyName = "pitch";
+            this.pitchDataGridViewTextBoxColumn.HeaderText = "pitch";
+            this.pitchDataGridViewTextBoxColumn.Name = "pitchDataGridViewTextBoxColumn";
+            this.pitchDataGridViewTextBoxColumn.Width = 50;
             // 
             // lbInputDevice
             // 
@@ -201,7 +258,9 @@
             this.menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.deviceToolStripMenuItem,
-            this.playStopToolStripMenuItem});
+            this.equalizerToolStripMenuItem,
+            this.playStopToolStripMenuItem,
+            this.graphsToolStripMenuItem});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
             this.menu.Size = new System.Drawing.Size(987, 24);
@@ -264,7 +323,7 @@
             // wASAPIToolStripMenuItem
             // 
             this.wASAPIToolStripMenuItem.Name = "wASAPIToolStripMenuItem";
-            this.wASAPIToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.wASAPIToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.wASAPIToolStripMenuItem.Text = "WASAPI";
             this.wASAPIToolStripMenuItem.Click += new System.EventHandler(this.wASAPIToolStripMenuItem_Click);
             // 
@@ -275,6 +334,13 @@
             this.playStopToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
             this.playStopToolStripMenuItem.Text = "Play/Stop";
             this.playStopToolStripMenuItem.Click += new System.EventHandler(this.playStopToolStripMenuItem_Click);
+            // 
+            // graphsToolStripMenuItem
+            // 
+            this.graphsToolStripMenuItem.Name = "graphsToolStripMenuItem";
+            this.graphsToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+            this.graphsToolStripMenuItem.Text = "Graphs";
+            this.graphsToolStripMenuItem.Click += new System.EventHandler(this.graphsToolStripMenuItem_Click);
             // 
             // tbInputID
             // 
@@ -295,7 +361,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(425, 233);
+            this.label3.Location = new System.Drawing.Point(425, 242);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(31, 13);
             this.label3.TabIndex = 29;
@@ -304,7 +370,7 @@
             // tbPitch
             // 
             this.tbPitch.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bsIOSource, "pitch", true));
-            this.tbPitch.Location = new System.Drawing.Point(428, 249);
+            this.tbPitch.Location = new System.Drawing.Point(428, 258);
             this.tbPitch.Name = "tbPitch";
             this.tbPitch.Size = new System.Drawing.Size(126, 20);
             this.tbPitch.TabIndex = 6;
@@ -431,26 +497,6 @@
             this.timer10ms.Interval = 10;
             this.timer10ms.Tick += new System.EventHandler(this.timer10ms_Tick);
             // 
-            // dataColumn2
-            // 
-            this.dataColumn2.Caption = "delay (smpl.)";
-            this.dataColumn2.ColumnName = "delay_smpl";
-            this.dataColumn2.DataType = typeof(int);
-            this.dataColumn2.DefaultValue = "0";
-            // 
-            // delay
-            // 
-            this.delay.DataPropertyName = "delay";
-            this.delay.HeaderText = "delay (ms)";
-            this.delay.Name = "delay";
-            this.delay.Width = 50;
-            // 
-            // delay_smpl
-            // 
-            this.delay_smpl.DataPropertyName = "delay_smpl";
-            this.delay_smpl.HeaderText = "delay (smpl.)";
-            this.delay_smpl.Name = "delay_smpl";
-            // 
             // lblDelay_smpl
             // 
             this.lblDelay_smpl.AutoSize = true;
@@ -469,46 +515,29 @@
             this.tbDelay_smpl.TabIndex = 35;
             this.tbDelay_smpl.Text = "0";
             // 
-            // pitchDataGridViewTextBoxColumn
+            // cbStereoInput
             // 
-            this.pitchDataGridViewTextBoxColumn.DataPropertyName = "pitch";
-            this.pitchDataGridViewTextBoxColumn.HeaderText = "pitch";
-            this.pitchDataGridViewTextBoxColumn.Name = "pitchDataGridViewTextBoxColumn";
-            this.pitchDataGridViewTextBoxColumn.Width = 50;
+            this.cbStereoInput.AutoSize = true;
+            this.cbStereoInput.Location = new System.Drawing.Point(418, 221);
+            this.cbStereoInput.Name = "cbStereoInput";
+            this.cbStereoInput.Size = new System.Drawing.Size(146, 17);
+            this.cbStereoInput.TabIndex = 37;
+            this.cbStereoInput.Text = "Stereo Input (no panning)";
+            this.cbStereoInput.UseVisualStyleBackColor = true;
             // 
-            // panningDataGridViewTextBoxColumn
+            // equalizerToolStripMenuItem
             // 
-            this.panningDataGridViewTextBoxColumn.DataPropertyName = "panning";
-            this.panningDataGridViewTextBoxColumn.HeaderText = "panning";
-            this.panningDataGridViewTextBoxColumn.Name = "panningDataGridViewTextBoxColumn";
-            this.panningDataGridViewTextBoxColumn.Width = 60;
-            // 
-            // volumeDataGridViewTextBoxColumn
-            // 
-            this.volumeDataGridViewTextBoxColumn.DataPropertyName = "volume";
-            this.volumeDataGridViewTextBoxColumn.HeaderText = "volume";
-            this.volumeDataGridViewTextBoxColumn.Name = "volumeDataGridViewTextBoxColumn";
-            this.volumeDataGridViewTextBoxColumn.Width = 60;
-            // 
-            // outputIDDataGridViewTextBoxColumn
-            // 
-            this.outputIDDataGridViewTextBoxColumn.DataPropertyName = "outputID";
-            this.outputIDDataGridViewTextBoxColumn.HeaderText = "outputID";
-            this.outputIDDataGridViewTextBoxColumn.Name = "outputIDDataGridViewTextBoxColumn";
-            this.outputIDDataGridViewTextBoxColumn.Width = 300;
-            // 
-            // inputIDDataGridViewTextBoxColumn
-            // 
-            this.inputIDDataGridViewTextBoxColumn.DataPropertyName = "inputID";
-            this.inputIDDataGridViewTextBoxColumn.HeaderText = "inputID";
-            this.inputIDDataGridViewTextBoxColumn.Name = "inputIDDataGridViewTextBoxColumn";
-            this.inputIDDataGridViewTextBoxColumn.Width = 300;
+            this.equalizerToolStripMenuItem.Name = "equalizerToolStripMenuItem";
+            this.equalizerToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
+            this.equalizerToolStripMenuItem.Text = "Equalizer";
+            this.equalizerToolStripMenuItem.Click += new System.EventHandler(this.equalizerToolStripMenuItem_Click);
             // 
             // formMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(987, 708);
+            this.Controls.Add(this.cbStereoInput);
             this.Controls.Add(this.lblDelay_smpl);
             this.Controls.Add(this.tbDelay_smpl);
             this.Controls.Add(this.pbVolume);
@@ -601,6 +630,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn volumeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn panningDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn pitchDataGridViewTextBoxColumn;
+        private System.Windows.Forms.ToolStripMenuItem graphsToolStripMenuItem;
+        private System.Windows.Forms.CheckBox cbStereoInput;
+        private System.Windows.Forms.ToolStripMenuItem equalizerToolStripMenuItem;
     }
 }
 

@@ -64,6 +64,8 @@ namespace ARWMIO
                                               (int)row["delay_smpl"],
                                               cbStereoInput.Checked
                                              );
+                        wPlayArr[i].iFFTSize = Convert.ToInt32(tbFFTSize.Text);
+                        wPlayArr[i].lOSamp = Convert.ToInt64(tbOSamp.Text);
                         threads[i] = new Thread(new ThreadStart(wPlayArr[i].wasapiPlay));
                         threads[i].Priority = ThreadPriority.Highest;
                         threads[i].Start(); // ?
@@ -337,6 +339,8 @@ namespace ARWMIO
                 {
                     graphsForm.PassArray(wPlayArr[0].byteArr);
                     graphsForm.wPlayArr = wPlayArr;
+
+                    textBox1.Text = wPlayArr[0].timespanTest.ToString();
 
                     if ((wPlayArr[0].byteArr.Length % 4) == 0)
                     {

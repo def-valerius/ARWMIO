@@ -59,6 +59,7 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deviceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wASAPIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.equalizerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.playStopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.graphsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tbInputID = new System.Windows.Forms.TextBox();
@@ -83,7 +84,8 @@
             this.lblDelay_smpl = new System.Windows.Forms.Label();
             this.tbDelay_smpl = new System.Windows.Forms.TextBox();
             this.cbStereoInput = new System.Windows.Forms.CheckBox();
-            this.equalizerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tbFFTSize = new System.Windows.Forms.TextBox();
+            this.tbOSamp = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dsList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtIOSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsIOSource)).BeginInit();
@@ -323,9 +325,16 @@
             // wASAPIToolStripMenuItem
             // 
             this.wASAPIToolStripMenuItem.Name = "wASAPIToolStripMenuItem";
-            this.wASAPIToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.wASAPIToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.wASAPIToolStripMenuItem.Text = "WASAPI";
             this.wASAPIToolStripMenuItem.Click += new System.EventHandler(this.wASAPIToolStripMenuItem_Click);
+            // 
+            // equalizerToolStripMenuItem
+            // 
+            this.equalizerToolStripMenuItem.Name = "equalizerToolStripMenuItem";
+            this.equalizerToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
+            this.equalizerToolStripMenuItem.Text = "Equalizer";
+            this.equalizerToolStripMenuItem.Click += new System.EventHandler(this.equalizerToolStripMenuItem_Click);
             // 
             // playStopToolStripMenuItem
             // 
@@ -525,18 +534,29 @@
             this.cbStereoInput.Text = "Stereo Input (no panning)";
             this.cbStereoInput.UseVisualStyleBackColor = true;
             // 
-            // equalizerToolStripMenuItem
+            // tbFFTSize
             // 
-            this.equalizerToolStripMenuItem.Name = "equalizerToolStripMenuItem";
-            this.equalizerToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
-            this.equalizerToolStripMenuItem.Text = "Equalizer";
-            this.equalizerToolStripMenuItem.Click += new System.EventHandler(this.equalizerToolStripMenuItem_Click);
+            this.tbFFTSize.Location = new System.Drawing.Point(498, 361);
+            this.tbFFTSize.Name = "tbFFTSize";
+            this.tbFFTSize.Size = new System.Drawing.Size(100, 20);
+            this.tbFFTSize.TabIndex = 38;
+            this.tbFFTSize.Text = "4096";
+            // 
+            // tbOSamp
+            // 
+            this.tbOSamp.Location = new System.Drawing.Point(604, 361);
+            this.tbOSamp.Name = "tbOSamp";
+            this.tbOSamp.Size = new System.Drawing.Size(100, 20);
+            this.tbOSamp.TabIndex = 39;
+            this.tbOSamp.Text = "4";
             // 
             // formMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(987, 708);
+            this.Controls.Add(this.tbOSamp);
+            this.Controls.Add(this.tbFFTSize);
             this.Controls.Add(this.cbStereoInput);
             this.Controls.Add(this.lblDelay_smpl);
             this.Controls.Add(this.tbDelay_smpl);
@@ -633,6 +653,8 @@
         private System.Windows.Forms.ToolStripMenuItem graphsToolStripMenuItem;
         private System.Windows.Forms.CheckBox cbStereoInput;
         private System.Windows.Forms.ToolStripMenuItem equalizerToolStripMenuItem;
+        private System.Windows.Forms.TextBox tbFFTSize;
+        private System.Windows.Forms.TextBox tbOSamp;
     }
 }
 

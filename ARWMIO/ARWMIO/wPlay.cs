@@ -25,11 +25,14 @@ namespace ARWMIO
         public bool bStereo;
         public string strInputDeviceID;
         public string strOutputDeviceID;
+        public int iFFTSize = 4096;
+        public long lOSamp = 4;
 
         public TimeSpan timespanTest; // TEST
         public byte[] byteArr;
         private byte[] byteArrPre;
         public int iPartOfArray = 0;
+        public int iAmountOFBuffers = 4;
 
         private WasapiOut wOut;
         public WasapiCapture wCapture;
@@ -71,36 +74,41 @@ namespace ARWMIO
             {
                 buffWaveProv.AddSamples(waveInEventArgs.Buffer, 0, waveInEventArgs.BytesRecorded);
 
+                /*
+                // time between wCapture.DataAvailable events
                 timespanTest = DateTime.Now - dtTest; // TEST
                 dtTest = DateTime.Now;
+                */
 
-                //publicWaveBuffer = new WaveBuffer(waveInEventArgs.Buffer);
-                if ((iPartOfArray < 4) & (waveInEventArgs.BytesRecorded > 0))
+                // time for creating buffer
+                dtTest = DateTime.Now;
+
+                if (iPartOfArray > iAmountOFBuffers)
+                    iPartOfArray = 0;
+
+                if ((iPartOfArray <= iAmountOFBuffers) & (waveInEventArgs.BytesRecorded > 0))
                 {
-                    byteArr = new byte[waveInEventArgs.BytesRecorded * (iPartOfArray + 1)];
                     if (iPartOfArray == 0)
                     {
+                        byteArr = new byte[waveInEventArgs.BytesRecorded];
                         byteArrPre = new byte[waveInEventArgs.BytesRecorded];
                         for (int i = 0; i < waveInEventArgs.BytesRecorded; i++)
                         {
                             byteArr[i] = waveInEventArgs.Buffer[i];
                             byteArrPre[i] = waveInEventArgs.Buffer[i];
                         }
-                        /*
-                        byteArr = waveInEventArgs.Buffer;
-                        byteArrPre = waveInEventArgs.Buffer;
-                        */
                         iPartOfArray++;
                     }
                     else
                     {
-                        if (!(iPartOfArray == 3))
+                        if (!(iPartOfArray == iAmountOFBuffers - 1))
                         {
                             iPartOfArray++;
                         }
                         else
                         {
-                            byte[] anotherArr = new byte[byteArrPre.Length - waveInEventArgs.BytesRecorded];
+                            //byte[] anotherArr = new byte[byteArrPre.Length - waveInEventArgs.BytesRecorded];
+                            byte[] anotherArr = new byte[Math.Abs(byteArrPre.Length - waveInEventArgs.BytesRecorded)];
                             int j = 0;
                             for (int l = waveInEventArgs.BytesRecorded; l < byteArrPre.Length; l++)
                             {
@@ -109,6 +117,8 @@ namespace ARWMIO
                             }
                             byteArrPre = anotherArr;
                         }
+
+                        byteArr = new byte[byteArrPre.Length + waveInEventArgs.BytesRecorded];
                         int i = 0;
                         for (i = 0; i < byteArrPre.Length; i++)
                             byteArr[i] = byteArrPre[i];
@@ -119,6 +129,10 @@ namespace ARWMIO
                         byteArrPre = byteArr;
                     }
                 }
+
+                // time for creating buffer
+                timespanTest = DateTime.Now - dtTest;
+
                 /*
                 byteArr = new byte[waveInEventArgs.BytesRecorded];
                 byteArr = waveInEventArgs.Buffer;
@@ -142,7 +156,9 @@ namespace ARWMIO
             wCapture.DataAvailable += funcForBuff;
 
             sampleProvider1 = buffWaveProv.ToSampleProvider();
-            smbPitchSampleProv1 = new SmbPitchShiftingSampleProvider(sampleProvider1);
+            //smbPitchSampleProv1 = new SmbPitchShiftingSampleProvider(sampleProvider1);
+            smbPitchSampleProv1 = new SmbPitchShiftingSampleProvider(sampleProvider1, iFFTSize, lOSamp, 1f);
+
             smbPitchSampleProv1.PitchFactor = fPitch;
 
             offsetSampleProv1 = new OffsetSampleProvider(smbPitchSampleProv1);

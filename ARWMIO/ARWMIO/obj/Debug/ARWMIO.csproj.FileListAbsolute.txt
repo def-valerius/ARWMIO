@@ -81,3 +81,4 @@ L:\vs_projects\arwmio_e\ARWMIO\ARWMIO\ARWMIO\obj\Debug\ARWMIO.csproj.CoreCompile
 L:\vs_projects\arwmio_e\ARWMIO\ARWMIO\ARWMIO\obj\Debug\ARWMIO.csproj.CopyComplete
 L:\vs_projects\arwmio_e\ARWMIO\ARWMIO\ARWMIO\obj\Debug\ARWMIO.exe
 L:\vs_projects\arwmio_e\ARWMIO\ARWMIO\ARWMIO\obj\Debug\ARWMIO.pdb
+L:\vs_projects\arwmio_e\ARWMIO\ARWMIO\ARWMIO\obj\Debug\ARWMIO.control_idk.resources

@@ -412,9 +412,9 @@ namespace ARWMIO
 
                     if (iMode == 1)
                     {
-                        Complex[] fftBuffer = new Complex[8192]; // 512, 1024, 2048, 4096, 8192, 16384
+                        Complex[] fftBuffer = new Complex[4096]; // 512, 1024, 2048, 4096, 8192, 16384
 
-                        int m = Convert.ToInt32(Math.Log(8192, 2.0));
+                        int m = Convert.ToInt32(Math.Log(4096, 2.0));
 
                         //for (int fftPos = 0; fftPos < fftBuffer.Length; fftPos++)
                         for (int fftPos = 0; fftPos < fftBuffer.Length; fftPos += wPlayArr[i].volumeSampleProv1.WaveFormat.Channels)
@@ -467,6 +467,17 @@ namespace ARWMIO
                                 maxVal = (float)dValue;
                                 maxValPos = m2;
                             }
+
+                            int test;
+                            try
+                            {
+                                test = Convert.ToInt32(dValue);
+                            }
+                            catch
+                            {
+                                dValue = 0;
+                            }
+
 
                             if ((m2 == 0) || (m2 == fftBuffer.Length - 1))
                             {

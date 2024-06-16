@@ -99,6 +99,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="control_idk.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="control_idk.Designer.cs">
+      <DependentUpon>control_idk.cs</DependentUpon>
+    </Compile>
     <Compile Include="equalizer_form.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,6 +126,9 @@
     <Compile Include="main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="wPlay.cs" />
+    <EmbeddedResource Include="control_idk.resx">
+      <DependentUpon>control_idk.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="equalizer_form.resx">
       <DependentUpon>equalizer_form.cs</DependentUpon>
     </EmbeddedResource>

@@ -377,5 +377,12 @@ namespace ARWMIO
             eqForm.PassRefArrwPlay(ref wPlayArr);
             eqForm.Show();
         }
+
+        private void idkControlsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            control_idk idkForm = new control_idk();
+            idkForm.PassRefArrwPlay(ref wPlayArr);
+            idkForm.Show();
+        }
     }
 }

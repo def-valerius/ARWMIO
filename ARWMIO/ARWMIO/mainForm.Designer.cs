@@ -86,6 +86,7 @@
             this.cbStereoInput = new System.Windows.Forms.CheckBox();
             this.tbFFTSize = new System.Windows.Forms.TextBox();
             this.tbOSamp = new System.Windows.Forms.TextBox();
+            this.idkControlsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dsList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtIOSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsIOSource)).BeginInit();
@@ -262,7 +263,8 @@
             this.deviceToolStripMenuItem,
             this.equalizerToolStripMenuItem,
             this.playStopToolStripMenuItem,
-            this.graphsToolStripMenuItem});
+            this.graphsToolStripMenuItem,
+            this.idkControlsToolStripMenuItem});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
             this.menu.Size = new System.Drawing.Size(987, 24);
@@ -550,6 +552,13 @@
             this.tbOSamp.TabIndex = 39;
             this.tbOSamp.Text = "4";
             // 
+            // idkControlsToolStripMenuItem
+            // 
+            this.idkControlsToolStripMenuItem.Name = "idkControlsToolStripMenuItem";
+            this.idkControlsToolStripMenuItem.Size = new System.Drawing.Size(81, 20);
+            this.idkControlsToolStripMenuItem.Text = "idk controls";
+            this.idkControlsToolStripMenuItem.Click += new System.EventHandler(this.idkControlsToolStripMenuItem_Click);
+            // 
             // formMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -655,6 +664,7 @@
         private System.Windows.Forms.ToolStripMenuItem equalizerToolStripMenuItem;
         private System.Windows.Forms.TextBox tbFFTSize;
         private System.Windows.Forms.TextBox tbOSamp;
+        private System.Windows.Forms.ToolStripMenuItem idkControlsToolStripMenuItem;
     }
 }
 

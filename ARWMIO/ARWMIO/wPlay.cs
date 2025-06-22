@@ -9,6 +9,8 @@ using NAudio.Wave.SampleProviders;
 using NAudio.Extras;
 using System.Threading;
 using NAudio.Dsp;
+using System.Security.Cryptography.X509Certificates;
+using System.Dynamic;
 
 namespace ARWMIO
 {
@@ -27,6 +29,7 @@ namespace ARWMIO
         public string strOutputDeviceID;
         public int iFFTSize = 4096;
         public long lOSamp = 4;
+        public float fLimit;
 
         public TimeSpan timespanTest; // TEST
         public byte[] byteArr;
@@ -44,11 +47,82 @@ namespace ARWMIO
         public SmbPitchShiftingSampleProvider smbPitchSampleProv1;
         public OffsetSampleProvider offsetSampleProv1;
         public PanningSampleProvider panSampleProv1;
+        public TestSampleProvider testSampleProv1;
         public Equalizer equalizerProv;
         public EqualizerBand[] eqBands;
+        public LimiterSampleProvider limiterProv1;
 
         DateTime dtTest = DateTime.Now;
-        public void setValues(string pInputID, string pOutputID, float pfPitch, int piDelay, float pfPanning, float pfVolume, int piDelay_smpl, bool pbStereo)
+
+        public class TestSampleProvider : ISampleProvider
+        {
+            private readonly ISampleProvider source;
+            public TestSampleProvider(ISampleProvider source)
+            {
+                this.source = source;
+                Volume = 1f;
+                pos = 0;
+            }
+            public float Volume { get; set; }
+            public float[] volume_arr { get; set; }
+            private int pos { get; set; }
+            public WaveFormat WaveFormat => source.WaveFormat;
+            public int Read(float[] buffer, int offset, int sampleCount)
+            {
+                int samplesRead = source.Read(buffer, offset, sampleCount);
+                /*
+                if (Volume != 1f)
+                {
+                    for (int n = 0; n < sampleCount; n++)
+                    {
+                        buffer[offset + n] *= Volume;
+                    }
+                }
+                */
+                if ((volume_arr != null) && (volume_arr.Length > 1))
+                {
+                    for (int n = 0; n < sampleCount; n++)
+                    {
+                        buffer[offset + n] *= volume_arr[pos];
+                        pos += 1;
+                        if (pos > volume_arr.Length - 1) pos = 0;
+                    }
+                }
+                return samplesRead;
+            }
+
+        }
+        public class LimiterSampleProvider : ISampleProvider
+        {
+            private readonly ISampleProvider source;
+            public LimiterSampleProvider(ISampleProvider source)
+            {
+                this.source = source;
+                Limit = 1f;
+            }
+            public float Limit { get; set; }
+            public WaveFormat WaveFormat => source.WaveFormat;
+            public int Read(float[] buffer, int offset, int sampleCount)
+            {
+                int samplesRead = source.Read(buffer, offset, sampleCount);
+                for (int n = 0; n < sampleCount; n++)
+                {
+                    if (Math.Abs(buffer[offset + n]) > Limit)
+                    {
+                        if (buffer[offset + n] > 0)
+                        {
+                            buffer[offset + n] = Limit;
+                        }
+                        else
+                        {
+                            buffer[offset + n] = -Limit;
+                        }
+                    }
+                }
+                return samplesRead;
+            }
+        }
+        public void setValues(string pInputID, string pOutputID, float pfPitch, int piDelay, float pfPanning, float pfVolume, int piDelay_smpl, bool pbStereo, float pfLimit)
         {
             strInputDeviceID = pInputID;
             strOutputDeviceID = pOutputID;
@@ -58,6 +132,7 @@ namespace ARWMIO
             fPanning = pfPanning;
             fVolume = pfVolume;
             bStereo = pbStereo;
+            fLimit = pfLimit;
         }
 
         public void wasapiPlay()
@@ -161,7 +236,11 @@ namespace ARWMIO
 
             smbPitchSampleProv1.PitchFactor = fPitch;
 
-            offsetSampleProv1 = new OffsetSampleProvider(smbPitchSampleProv1);
+            limiterProv1 = new LimiterSampleProvider(smbPitchSampleProv1);
+            limiterProv1.Limit = fLimit;
+
+            //offsetSampleProv1 = new OffsetSampleProvider(smbPitchSampleProv1);
+            offsetSampleProv1 = new OffsetSampleProvider(limiterProv1);
             offsetSampleProv1.DelayBy = new TimeSpan(0, 0, 0, 0, iDelay);
             if (iDelaySample > 0)
                 offsetSampleProv1.DelayBySamples = iDelaySample;
@@ -179,30 +258,66 @@ namespace ARWMIO
             }
 
             volumeSampleProv1.Volume = fVolume;
+            testSampleProv1 = new TestSampleProvider(volumeSampleProv1);
+            //float[] test_f_arr = { 1f, 1f, 0f, 0f, 1f, 1f, 0f, 0f };
+            int size = 50000;
+            float one_step = (float)Math.PI / (float)size;
+            float[] test_f_arr = new float[size];
+            for (int n = 0; n < size; n++)
+            {
+                /*
+                //<square 
+                if (n < (size / 2)) test_f_arr[n] = 0.1f;
+                if (n >=(size / 2)) test_f_arr[n] = 1f;
+                //quare>
+                */
+
+                //test_f_arr[n] = n / (size / 2); // saw
+
+                /*
+                //<pyramid shape?
+                if (n <= (size / 2)) test_f_arr[n] = (n / (float)(size / 2)) + 0.2f;
+                if (n > (size / 2)) test_f_arr[n] = ((float)(size - n) / (float)(size / 2)) + 0.2f;
+                //>
+                */
+
+                //test_f_arr[n] = (float)Math.Sin(one_step * n); // sinusoid
+
+                //test_f_arr[n] = (float)Math.Pow(Math.Sin(one_step * n), 2); // 
+
+                test_f_arr[n] = 1;
+            }
+            
+            testSampleProv1.volume_arr = test_f_arr;
 
             eqBands = new EqualizerBand[]
                                     {
                                         new EqualizerBand{Bandwidth = 0.8f, Frequency = 20, Gain = 0 },
-                                        new EqualizerBand{Bandwidth = 0.8f, Frequency = 40, Gain = 0 },
-                                        new EqualizerBand{Bandwidth = 0.8f, Frequency = 80, Gain = 0 },
-                                        new EqualizerBand{Bandwidth = 0.8f, Frequency = 160, Gain = 0 },
-                                        new EqualizerBand{Bandwidth = 0.8f, Frequency = 320, Gain = 0 },
-                                        new EqualizerBand{Bandwidth = 0.8f, Frequency = 640, Gain = 0 },
-                                        new EqualizerBand{Bandwidth = 0.8f, Frequency = 1280, Gain = 0 },
-                                        new EqualizerBand{Bandwidth = 0.8f, Frequency = 2560, Gain = 0 },
-                                        new EqualizerBand{Bandwidth = 0.8f, Frequency = 5120, Gain = 0 },
-                                        new EqualizerBand{Bandwidth = 0.8f, Frequency = 10240, Gain = 0 },
-                                        new EqualizerBand{Bandwidth = 0.8f, Frequency = 20480, Gain = 0 },
-                                        new EqualizerBand{Bandwidth = 0.8f, Frequency = 20480, Gain = 0 },
-                                        new EqualizerBand{Bandwidth = 0.8f, Frequency = 20480, Gain = 0 },
-                                        new EqualizerBand{Bandwidth = 0.8f, Frequency = 20480, Gain = 0 },
-                                        new EqualizerBand{Bandwidth = 0.8f, Frequency = 20480, Gain = 0 },
-                                        new EqualizerBand{Bandwidth = 0.8f, Frequency = 20480, Gain = 0 }
+                                        new EqualizerBand{Bandwidth = 0.8f, Frequency = 24, Gain = 0 },
+                                        new EqualizerBand{Bandwidth = 0.8f, Frequency = 30, Gain = 0 },
+                                        new EqualizerBand{Bandwidth = 0.8f, Frequency = 60, Gain = 0 },
+                                        new EqualizerBand{Bandwidth = 0.8f, Frequency = 90, Gain = 0 },
+                                        new EqualizerBand{Bandwidth = 0.8f, Frequency = 120, Gain = 0 },
+                                        new EqualizerBand{Bandwidth = 0.8f, Frequency = 220, Gain = 0 },
+                                        new EqualizerBand{Bandwidth = 0.8f, Frequency = 440, Gain = 0 },
+                                        new EqualizerBand{Bandwidth = 0.8f, Frequency = 666, Gain = 0 },
+                                        new EqualizerBand{Bandwidth = 0.8f, Frequency = 800, Gain = 0 },
+                                        new EqualizerBand{Bandwidth = 0.8f, Frequency = 1000, Gain = 0 },
+                                        new EqualizerBand{Bandwidth = 0.8f, Frequency = 1400, Gain = 0 },
+                                        new EqualizerBand{Bandwidth = 0.8f, Frequency = 2000, Gain = 0 },
+                                        new EqualizerBand{Bandwidth = 0.8f, Frequency = 5000, Gain = 0 },
+                                        new EqualizerBand{Bandwidth = 0.8f, Frequency = 10000, Gain = 0 },
+                                        new EqualizerBand{Bandwidth = 0.8f, Frequency = 20000, Gain = 0 }
                                     };
-            equalizerProv = new Equalizer(volumeSampleProv1, eqBands);
+            //equalizerProv = new Equalizer(volumeSampleProv1, eqBands);
+            equalizerProv = new Equalizer(testSampleProv1, eqBands);
+
+            //limiterProv1 = new LimiterSampleProvider(equalizerProv);
+            //limiterProv1.Limit = 0.1f;
 
             //wOut.Init(volumeSampleProv1);
             wOut.Init(equalizerProv);
+            //wOut.Init(limiterProv1);
             wCapture.StartRecording();
             wOut.Play();
 

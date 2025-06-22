@@ -30,6 +30,12 @@ namespace ARWMIO
         public float fCoefficient = 1;
         public int iCounter = 0;
         public int iMode = 0; // 0 - Wave, 1 - Spectrum Analysis
+        
+        public static int iArrLen = 8;
+        public Complex[][] arrOfCompl = new Complex[iArrLen][];
+        private int iArrPart = 0;        
+        private bool doStatisticalShit = false;
+
         public graphs()
         {
             InitializeComponent();
@@ -412,7 +418,7 @@ namespace ARWMIO
 
                     if (iMode == 1)
                     {
-                        Complex[] fftBuffer = new Complex[4096]; // 512, 1024, 2048, 4096, 8192, 16384
+                        Complex[] fftBuffer = new Complex[4096]; // 512, 1024, 2048, 4096, 8192, 16384, 32768
 
                         int m = Convert.ToInt32(Math.Log(4096, 2.0));
 
@@ -420,17 +426,48 @@ namespace ARWMIO
                         for (int fftPos = 0; fftPos < fftBuffer.Length; fftPos += wPlayArr[i].volumeSampleProv1.WaveFormat.Channels)
                         {
                             //fftBuffer[fftPos].X = (float)(fBufferArr[fftPos] * FastFourierTransform.HammingWindow(fftPos, fftBuffer.Length));
-                            //fftBuffer[fftPos].X = (float)(fBufferArr[fftPos] * FastFourierTransform.HannWindow(fftPos, fftBuffer.Length));
+                            fftBuffer[fftPos].X = (float)(fBufferArr[fftPos] * FastFourierTransform.HannWindow(fftPos, fftBuffer.Length));
                             //fftBuffer[fftPos].X = (float)(fBufferArr[fftPos] * FastFourierTransform.BlackmannHarrisWindow(fftPos, fftBuffer.Length));
-                            fftBuffer[fftPos].X = (float)fBufferArr[fftPos];
+                            //fftBuffer[fftPos].X = (float)fBufferArr[fftPos];
                             fftBuffer[fftPos].Y = 0;
                         }
 
                         FastFourierTransform.FFT(true, m, fftBuffer);
 
+                        if (iArrPart < iArrLen)
+                        {
+                            arrOfCompl[iArrPart] = fftBuffer;
+                            iArrPart++;
+                        }
+                        else
+                        {
+                            iArrPart = 0;
+                            arrOfCompl[iArrPart] = fftBuffer;
+                            iArrPart++;
+                            doStatisticalShit = true;
+                        }
+
+                        #region statistical values over multiple arrays (?)
+                        if (doStatisticalShit)
+                        {
+                            for (int iPosInBuff = 0; iPosInBuff < fftBuffer.Length; iPosInBuff++)
+                            {
+                                float fXVal = 0;
+                                float fYVal = 0;
+                                for (int iPart = 0; iPart < arrOfCompl.Length; iPart++)
+                                {
+                                    fXVal += arrOfCompl[iPart][iPosInBuff].X;
+                                    fYVal += arrOfCompl[iPart][iPosInBuff].Y;
+                                }
+                                fftBuffer[iPosInBuff].X = fXVal / (float)iArrLen;
+                                fftBuffer[iPosInBuff].Y = fYVal / (float)iArrLen;
+                            }
+                        }
+                        #endregion
+
                         double d = (double)fftBuffer.Length / (double)pictureBox1.Width;
                         d *= fHorizScale;
-                        d /= 8;
+                        d /= 8f; // 8
                         float widthScale = Convert.ToSingle(d);
                         int pM = 0, pN = 0;
                         int m2;

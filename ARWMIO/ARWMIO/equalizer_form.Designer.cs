@@ -81,7 +81,25 @@ namespace ARWMIO
             this.tbFreq1 = new System.Windows.Forms.TextBox();
             this.bandwidth = new System.Windows.Forms.Label();
             this.gain = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.frequency = new System.Windows.Forms.Label();
+            this.tbGain1 = new System.Windows.Forms.TextBox();
+            this.gainValue = new System.Windows.Forms.Label();
+            this.tbGain2 = new System.Windows.Forms.TextBox();
+            this.tbGain4 = new System.Windows.Forms.TextBox();
+            this.tbGain3 = new System.Windows.Forms.TextBox();
+            this.tbGain8 = new System.Windows.Forms.TextBox();
+            this.tbGain7 = new System.Windows.Forms.TextBox();
+            this.tbGain6 = new System.Windows.Forms.TextBox();
+            this.tbGain5 = new System.Windows.Forms.TextBox();
+            this.tbGain16 = new System.Windows.Forms.TextBox();
+            this.tbGain15 = new System.Windows.Forms.TextBox();
+            this.tbGain14 = new System.Windows.Forms.TextBox();
+            this.tbGain13 = new System.Windows.Forms.TextBox();
+            this.tbGain12 = new System.Windows.Forms.TextBox();
+            this.tbGain11 = new System.Windows.Forms.TextBox();
+            this.tbGain10 = new System.Windows.Forms.TextBox();
+            this.tbGain9 = new System.Windows.Forms.TextBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).BeginInit();
@@ -109,6 +127,7 @@ namespace ARWMIO
             this.trackBar1.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trackBar1.Size = new System.Drawing.Size(45, 180);
             this.trackBar1.TabIndex = 0;
+            this.trackBar1.ValueChanged += new System.EventHandler(this.trackBar1_ValueChanged);
             // 
             // trackBar2
             // 
@@ -119,6 +138,7 @@ namespace ARWMIO
             this.trackBar2.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trackBar2.Size = new System.Drawing.Size(45, 180);
             this.trackBar2.TabIndex = 1;
+            this.trackBar2.ValueChanged += new System.EventHandler(this.trackBar2_ValueChanged);
             // 
             // trackBar3
             // 
@@ -129,6 +149,7 @@ namespace ARWMIO
             this.trackBar3.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trackBar3.Size = new System.Drawing.Size(45, 180);
             this.trackBar3.TabIndex = 2;
+            this.trackBar3.ValueChanged += new System.EventHandler(this.trackBar3_ValueChanged);
             // 
             // trackBar4
             // 
@@ -139,6 +160,7 @@ namespace ARWMIO
             this.trackBar4.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trackBar4.Size = new System.Drawing.Size(45, 180);
             this.trackBar4.TabIndex = 3;
+            this.trackBar4.ValueChanged += new System.EventHandler(this.trackBar4_ValueChanged);
             // 
             // trackBar5
             // 
@@ -149,6 +171,7 @@ namespace ARWMIO
             this.trackBar5.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trackBar5.Size = new System.Drawing.Size(45, 180);
             this.trackBar5.TabIndex = 4;
+            this.trackBar5.ValueChanged += new System.EventHandler(this.trackBar5_ValueChanged);
             // 
             // trackBar6
             // 
@@ -159,6 +182,7 @@ namespace ARWMIO
             this.trackBar6.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trackBar6.Size = new System.Drawing.Size(45, 180);
             this.trackBar6.TabIndex = 5;
+            this.trackBar6.ValueChanged += new System.EventHandler(this.trackBar6_ValueChanged);
             // 
             // trackBar7
             // 
@@ -169,6 +193,7 @@ namespace ARWMIO
             this.trackBar7.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trackBar7.Size = new System.Drawing.Size(45, 180);
             this.trackBar7.TabIndex = 6;
+            this.trackBar7.ValueChanged += new System.EventHandler(this.trackBar7_ValueChanged);
             // 
             // trackBar8
             // 
@@ -179,6 +204,7 @@ namespace ARWMIO
             this.trackBar8.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trackBar8.Size = new System.Drawing.Size(45, 180);
             this.trackBar8.TabIndex = 7;
+            this.trackBar8.ValueChanged += new System.EventHandler(this.trackBar8_ValueChanged);
             // 
             // trackBar9
             // 
@@ -189,6 +215,7 @@ namespace ARWMIO
             this.trackBar9.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trackBar9.Size = new System.Drawing.Size(45, 180);
             this.trackBar9.TabIndex = 8;
+            this.trackBar9.ValueChanged += new System.EventHandler(this.trackBar9_ValueChanged);
             // 
             // trackBar10
             // 
@@ -199,6 +226,7 @@ namespace ARWMIO
             this.trackBar10.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trackBar10.Size = new System.Drawing.Size(45, 180);
             this.trackBar10.TabIndex = 9;
+            this.trackBar10.ValueChanged += new System.EventHandler(this.trackBar10_ValueChanged);
             // 
             // trackBar11
             // 
@@ -209,6 +237,7 @@ namespace ARWMIO
             this.trackBar11.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trackBar11.Size = new System.Drawing.Size(45, 180);
             this.trackBar11.TabIndex = 10;
+            this.trackBar11.ValueChanged += new System.EventHandler(this.trackBar11_ValueChanged);
             // 
             // trackBar12
             // 
@@ -219,6 +248,7 @@ namespace ARWMIO
             this.trackBar12.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trackBar12.Size = new System.Drawing.Size(45, 180);
             this.trackBar12.TabIndex = 11;
+            this.trackBar12.ValueChanged += new System.EventHandler(this.trackBar12_ValueChanged);
             // 
             // trackBar13
             // 
@@ -229,6 +259,7 @@ namespace ARWMIO
             this.trackBar13.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trackBar13.Size = new System.Drawing.Size(45, 180);
             this.trackBar13.TabIndex = 12;
+            this.trackBar13.ValueChanged += new System.EventHandler(this.trackBar13_ValueChanged);
             // 
             // trackBar14
             // 
@@ -239,6 +270,7 @@ namespace ARWMIO
             this.trackBar14.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trackBar14.Size = new System.Drawing.Size(45, 180);
             this.trackBar14.TabIndex = 13;
+            this.trackBar14.ValueChanged += new System.EventHandler(this.trackBar14_ValueChanged);
             // 
             // trackBar15
             // 
@@ -249,6 +281,7 @@ namespace ARWMIO
             this.trackBar15.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trackBar15.Size = new System.Drawing.Size(45, 180);
             this.trackBar15.TabIndex = 14;
+            this.trackBar15.ValueChanged += new System.EventHandler(this.trackBar15_ValueChanged);
             // 
             // trackBar16
             // 
@@ -259,12 +292,13 @@ namespace ARWMIO
             this.trackBar16.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trackBar16.Size = new System.Drawing.Size(45, 180);
             this.trackBar16.TabIndex = 15;
+            this.trackBar16.ValueChanged += new System.EventHandler(this.trackBar16_ValueChanged);
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(65, 291);
+            this.btnUpdate.Location = new System.Drawing.Point(65, 326);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(110, 23);
+            this.btnUpdate.Size = new System.Drawing.Size(110, 21);
             this.btnUpdate.TabIndex = 16;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = true;
@@ -544,21 +578,201 @@ namespace ARWMIO
             this.gain.TabIndex = 50;
             this.gain.Text = "Gain";
             // 
-            // label1
+            // frequency
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 46);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 13);
-            this.label1.TabIndex = 51;
-            this.label1.Text = "Frequency";
+            this.frequency.AutoSize = true;
+            this.frequency.Location = new System.Drawing.Point(3, 46);
+            this.frequency.Name = "frequency";
+            this.frequency.Size = new System.Drawing.Size(57, 13);
+            this.frequency.TabIndex = 51;
+            this.frequency.Text = "Frequency";
+            // 
+            // tbGain1
+            // 
+            this.tbGain1.Location = new System.Drawing.Point(65, 281);
+            this.tbGain1.Name = "tbGain1";
+            this.tbGain1.Size = new System.Drawing.Size(45, 20);
+            this.tbGain1.TabIndex = 52;
+            this.tbGain1.Text = "0";
+            this.tbGain1.Validated += new System.EventHandler(this.tbGain1_Validated);
+            // 
+            // gainValue
+            // 
+            this.gainValue.AutoSize = true;
+            this.gainValue.Location = new System.Drawing.Point(3, 284);
+            this.gainValue.Name = "gainValue";
+            this.gainValue.Size = new System.Drawing.Size(58, 13);
+            this.gainValue.TabIndex = 53;
+            this.gainValue.Text = "Gain value";
+            // 
+            // tbGain2
+            // 
+            this.tbGain2.Location = new System.Drawing.Point(116, 281);
+            this.tbGain2.Name = "tbGain2";
+            this.tbGain2.Size = new System.Drawing.Size(45, 20);
+            this.tbGain2.TabIndex = 54;
+            this.tbGain2.Text = "0";
+            this.tbGain2.Validated += new System.EventHandler(this.tbGain2_Validated);
+            // 
+            // tbGain4
+            // 
+            this.tbGain4.Location = new System.Drawing.Point(218, 281);
+            this.tbGain4.Name = "tbGain4";
+            this.tbGain4.Size = new System.Drawing.Size(45, 20);
+            this.tbGain4.TabIndex = 56;
+            this.tbGain4.Text = "0";
+            this.tbGain4.Validated += new System.EventHandler(this.tbGain4_Validated);
+            // 
+            // tbGain3
+            // 
+            this.tbGain3.Location = new System.Drawing.Point(167, 281);
+            this.tbGain3.Name = "tbGain3";
+            this.tbGain3.Size = new System.Drawing.Size(45, 20);
+            this.tbGain3.TabIndex = 55;
+            this.tbGain3.Text = "0";
+            this.tbGain3.Validated += new System.EventHandler(this.tbGain3_Validated);
+            // 
+            // tbGain8
+            // 
+            this.tbGain8.Location = new System.Drawing.Point(422, 281);
+            this.tbGain8.Name = "tbGain8";
+            this.tbGain8.Size = new System.Drawing.Size(45, 20);
+            this.tbGain8.TabIndex = 60;
+            this.tbGain8.Text = "0";
+            this.tbGain8.Validated += new System.EventHandler(this.tbGain8_Validated);
+            // 
+            // tbGain7
+            // 
+            this.tbGain7.Location = new System.Drawing.Point(371, 281);
+            this.tbGain7.Name = "tbGain7";
+            this.tbGain7.Size = new System.Drawing.Size(45, 20);
+            this.tbGain7.TabIndex = 59;
+            this.tbGain7.Text = "0";
+            this.tbGain7.Validated += new System.EventHandler(this.tbGain7_Validated);
+            // 
+            // tbGain6
+            // 
+            this.tbGain6.Location = new System.Drawing.Point(320, 281);
+            this.tbGain6.Name = "tbGain6";
+            this.tbGain6.Size = new System.Drawing.Size(45, 20);
+            this.tbGain6.TabIndex = 58;
+            this.tbGain6.Text = "0";
+            this.tbGain6.Validated += new System.EventHandler(this.tbGain6_Validated);
+            // 
+            // tbGain5
+            // 
+            this.tbGain5.Location = new System.Drawing.Point(269, 281);
+            this.tbGain5.Name = "tbGain5";
+            this.tbGain5.Size = new System.Drawing.Size(45, 20);
+            this.tbGain5.TabIndex = 57;
+            this.tbGain5.Text = "0";
+            this.tbGain5.Validated += new System.EventHandler(this.tbGain5_Validated);
+            // 
+            // tbGain16
+            // 
+            this.tbGain16.Location = new System.Drawing.Point(830, 281);
+            this.tbGain16.Name = "tbGain16";
+            this.tbGain16.Size = new System.Drawing.Size(45, 20);
+            this.tbGain16.TabIndex = 68;
+            this.tbGain16.Text = "0";
+            this.tbGain16.Validated += new System.EventHandler(this.tbGain16_Validated);
+            // 
+            // tbGain15
+            // 
+            this.tbGain15.Location = new System.Drawing.Point(779, 281);
+            this.tbGain15.Name = "tbGain15";
+            this.tbGain15.Size = new System.Drawing.Size(45, 20);
+            this.tbGain15.TabIndex = 67;
+            this.tbGain15.Text = "0";
+            this.tbGain15.Validated += new System.EventHandler(this.tbGain15_Validated);
+            // 
+            // tbGain14
+            // 
+            this.tbGain14.Location = new System.Drawing.Point(728, 281);
+            this.tbGain14.Name = "tbGain14";
+            this.tbGain14.Size = new System.Drawing.Size(45, 20);
+            this.tbGain14.TabIndex = 66;
+            this.tbGain14.Text = "0";
+            this.tbGain14.Validated += new System.EventHandler(this.tbGain14_Validated);
+            // 
+            // tbGain13
+            // 
+            this.tbGain13.Location = new System.Drawing.Point(677, 281);
+            this.tbGain13.Name = "tbGain13";
+            this.tbGain13.Size = new System.Drawing.Size(45, 20);
+            this.tbGain13.TabIndex = 65;
+            this.tbGain13.Text = "0";
+            this.tbGain13.Validated += new System.EventHandler(this.tbGain13_Validated);
+            // 
+            // tbGain12
+            // 
+            this.tbGain12.Location = new System.Drawing.Point(626, 281);
+            this.tbGain12.Name = "tbGain12";
+            this.tbGain12.Size = new System.Drawing.Size(45, 20);
+            this.tbGain12.TabIndex = 64;
+            this.tbGain12.Text = "0";
+            this.tbGain12.Validated += new System.EventHandler(this.tbGain12_Validated);
+            // 
+            // tbGain11
+            // 
+            this.tbGain11.Location = new System.Drawing.Point(575, 281);
+            this.tbGain11.Name = "tbGain11";
+            this.tbGain11.Size = new System.Drawing.Size(45, 20);
+            this.tbGain11.TabIndex = 63;
+            this.tbGain11.Text = "0";
+            this.tbGain11.Validated += new System.EventHandler(this.tbGain11_Validated);
+            // 
+            // tbGain10
+            // 
+            this.tbGain10.Location = new System.Drawing.Point(524, 281);
+            this.tbGain10.Name = "tbGain10";
+            this.tbGain10.Size = new System.Drawing.Size(45, 20);
+            this.tbGain10.TabIndex = 62;
+            this.tbGain10.Text = "0";
+            this.tbGain10.Validated += new System.EventHandler(this.tbGain10_Validated);
+            // 
+            // tbGain9
+            // 
+            this.tbGain9.Location = new System.Drawing.Point(473, 281);
+            this.tbGain9.Name = "tbGain9";
+            this.tbGain9.Size = new System.Drawing.Size(45, 20);
+            this.tbGain9.TabIndex = 61;
+            this.tbGain9.Text = "0";
+            this.tbGain9.Validated += new System.EventHandler(this.tbGain9_Validated);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(193, 326);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(212, 21);
+            this.comboBox1.TabIndex = 69;
+            this.comboBox1.Validated += new System.EventHandler(this.comboBox1_Validated);
             // 
             // equalizer_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(921, 361);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.tbGain16);
+            this.Controls.Add(this.tbGain15);
+            this.Controls.Add(this.tbGain14);
+            this.Controls.Add(this.tbGain13);
+            this.Controls.Add(this.tbGain12);
+            this.Controls.Add(this.tbGain11);
+            this.Controls.Add(this.tbGain10);
+            this.Controls.Add(this.tbGain9);
+            this.Controls.Add(this.tbGain8);
+            this.Controls.Add(this.tbGain7);
+            this.Controls.Add(this.tbGain6);
+            this.Controls.Add(this.tbGain5);
+            this.Controls.Add(this.tbGain4);
+            this.Controls.Add(this.tbGain3);
+            this.Controls.Add(this.tbGain2);
+            this.Controls.Add(this.gainValue);
+            this.Controls.Add(this.tbGain1);
+            this.Controls.Add(this.frequency);
             this.Controls.Add(this.gain);
             this.Controls.Add(this.bandwidth);
             this.Controls.Add(this.tbFreq16);
@@ -687,6 +901,24 @@ namespace ARWMIO
         private System.Windows.Forms.TextBox tbFreq1;
         private System.Windows.Forms.Label bandwidth;
         private System.Windows.Forms.Label gain;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label frequency;
+        private System.Windows.Forms.TextBox tbGain1;
+        private System.Windows.Forms.Label gainValue;
+        private System.Windows.Forms.TextBox tbGain2;
+        private System.Windows.Forms.TextBox tbGain4;
+        private System.Windows.Forms.TextBox tbGain3;
+        private System.Windows.Forms.TextBox tbGain8;
+        private System.Windows.Forms.TextBox tbGain7;
+        private System.Windows.Forms.TextBox tbGain6;
+        private System.Windows.Forms.TextBox tbGain5;
+        private System.Windows.Forms.TextBox tbGain16;
+        private System.Windows.Forms.TextBox tbGain15;
+        private System.Windows.Forms.TextBox tbGain14;
+        private System.Windows.Forms.TextBox tbGain13;
+        private System.Windows.Forms.TextBox tbGain12;
+        private System.Windows.Forms.TextBox tbGain11;
+        private System.Windows.Forms.TextBox tbGain10;
+        private System.Windows.Forms.TextBox tbGain9;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

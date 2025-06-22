@@ -54,6 +54,14 @@ namespace ARWMIO
                 {
                     if ((row["inputID"].ToString() != "") & (row["outputID"].ToString() != ""))
                     {
+                        //TEST!!!
+                        byte[] byte_array = new byte[(int)row["delay"]];
+                        for (int j = 0; j < (int)row["delay"]; j++)
+                        {
+                            byte_array[j] = (byte)j;
+                        }
+                        //row["byte_arr_test"] = byte_array;
+
                         wPlayArr[i] = new wPlay();
                         wPlayArr[i].setValues(row["inputID"].ToString(),
                                               row["outputID"].ToString(),
@@ -62,7 +70,8 @@ namespace ARWMIO
                                               (float)row["panning"],
                                               (float)row["volume"],
                                               (int)row["delay_smpl"],
-                                              cbStereoInput.Checked
+                                              cbStereoInput.Checked,
+                                              (float)row["limit"]
                                              );
                         wPlayArr[i].iFFTSize = Convert.ToInt32(tbFFTSize.Text);
                         wPlayArr[i].lOSamp = Convert.ToInt64(tbOSamp.Text);
@@ -175,22 +184,29 @@ namespace ARWMIO
             float fVolumeBuff = 1f;
             float fPanningBuff = 0f;
             float fPitchBuff = 1f;
+            float fLimit = 1;
 
             if (tbDelay_ms.Text != "") { intDelayBuff = Int32.Parse(tbDelay_ms.Text); }
             if (tbDelay_smpl.Text != "") { intDelaySmplBuff = Int32.Parse(tbDelay_smpl.Text); }
             if (tbVolume.Text != "") { fVolumeBuff = Convert.ToSingle(tbVolume.Text); }
             if (tbPanning.Text != "") { fPanningBuff = Convert.ToSingle(tbPanning.Text); }
             if (tbPitch.Text != "") { fPitchBuff = Convert.ToSingle(tbPitch.Text); }
+            if (tbLimit.Text != "") { fLimit = Convert.ToSingle(tbLimit.Text); }
+
+            //TEST byte array!!!!!
+            byte[] byte_array = new byte[0];
 
             DataTable dtIOSource = new DataTable();
             dtIOSource = dsList.Tables["IOSource"];
-            DataRow row = dtIOSource.Rows.Add(tbInputID.Text, 
+            DataRow row = dtIOSource.Rows.Add(tbInputID.Text,
                                               tbOutputID.Text,
                                               intDelayBuff,
                                               fVolumeBuff,
                                               fPanningBuff,
                                               fPitchBuff,
-                                              intDelaySmplBuff
+                                              intDelaySmplBuff,
+                                              //byte_array // TEST!!!
+                                              fLimit
                                              );
             //row["inputID"] = tbInputID.Text;
             

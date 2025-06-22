@@ -41,13 +41,6 @@
             this.dataColumn2 = new System.Data.DataColumn();
             this.bsIOSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.inputIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.outputIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.delay = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.delay_smpl = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.volumeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panningDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pitchDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lbInputDevice = new System.Windows.Forms.ListBox();
             this.lbOutputDevice = new System.Windows.Forms.ListBox();
             this.menu = new System.Windows.Forms.MenuStrip();
@@ -62,6 +55,7 @@
             this.equalizerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.playStopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.graphsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.idkControlsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tbInputID = new System.Windows.Forms.TextBox();
             this.tbOutputID = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -86,7 +80,17 @@
             this.cbStereoInput = new System.Windows.Forms.CheckBox();
             this.tbFFTSize = new System.Windows.Forms.TextBox();
             this.tbOSamp = new System.Windows.Forms.TextBox();
-            this.idkControlsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dataColumn3 = new System.Data.DataColumn();
+            this.inputIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.outputIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.delay = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.delay_smpl = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.volumeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panningDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pitchDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.limit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tbLimit = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dsList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtIOSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsIOSource)).BeginInit();
@@ -110,7 +114,8 @@
             this.col_volume,
             this.col_panning,
             this.dataColumn1,
-            this.dataColumn2});
+            this.dataColumn2,
+            this.dataColumn3});
             this.dtIOSource.TableName = "IOSource";
             // 
             // col_InputID
@@ -182,61 +187,14 @@
             this.delay_smpl,
             this.volumeDataGridViewTextBoxColumn,
             this.panningDataGridViewTextBoxColumn,
-            this.pitchDataGridViewTextBoxColumn});
+            this.pitchDataGridViewTextBoxColumn,
+            this.limit});
             this.dataGridView1.DataSource = this.bsIOSource;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 414);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 413);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dataGridView1.Size = new System.Drawing.Size(963, 282);
             this.dataGridView1.TabIndex = 10;
-            // 
-            // inputIDDataGridViewTextBoxColumn
-            // 
-            this.inputIDDataGridViewTextBoxColumn.DataPropertyName = "inputID";
-            this.inputIDDataGridViewTextBoxColumn.HeaderText = "inputID";
-            this.inputIDDataGridViewTextBoxColumn.Name = "inputIDDataGridViewTextBoxColumn";
-            this.inputIDDataGridViewTextBoxColumn.Width = 300;
-            // 
-            // outputIDDataGridViewTextBoxColumn
-            // 
-            this.outputIDDataGridViewTextBoxColumn.DataPropertyName = "outputID";
-            this.outputIDDataGridViewTextBoxColumn.HeaderText = "outputID";
-            this.outputIDDataGridViewTextBoxColumn.Name = "outputIDDataGridViewTextBoxColumn";
-            this.outputIDDataGridViewTextBoxColumn.Width = 300;
-            // 
-            // delay
-            // 
-            this.delay.DataPropertyName = "delay";
-            this.delay.HeaderText = "delay (ms)";
-            this.delay.Name = "delay";
-            this.delay.Width = 50;
-            // 
-            // delay_smpl
-            // 
-            this.delay_smpl.DataPropertyName = "delay_smpl";
-            this.delay_smpl.HeaderText = "delay (smpl.)";
-            this.delay_smpl.Name = "delay_smpl";
-            // 
-            // volumeDataGridViewTextBoxColumn
-            // 
-            this.volumeDataGridViewTextBoxColumn.DataPropertyName = "volume";
-            this.volumeDataGridViewTextBoxColumn.HeaderText = "volume";
-            this.volumeDataGridViewTextBoxColumn.Name = "volumeDataGridViewTextBoxColumn";
-            this.volumeDataGridViewTextBoxColumn.Width = 60;
-            // 
-            // panningDataGridViewTextBoxColumn
-            // 
-            this.panningDataGridViewTextBoxColumn.DataPropertyName = "panning";
-            this.panningDataGridViewTextBoxColumn.HeaderText = "panning";
-            this.panningDataGridViewTextBoxColumn.Name = "panningDataGridViewTextBoxColumn";
-            this.panningDataGridViewTextBoxColumn.Width = 60;
-            // 
-            // pitchDataGridViewTextBoxColumn
-            // 
-            this.pitchDataGridViewTextBoxColumn.DataPropertyName = "pitch";
-            this.pitchDataGridViewTextBoxColumn.HeaderText = "pitch";
-            this.pitchDataGridViewTextBoxColumn.Name = "pitchDataGridViewTextBoxColumn";
-            this.pitchDataGridViewTextBoxColumn.Width = 50;
             // 
             // lbInputDevice
             // 
@@ -353,6 +311,13 @@
             this.graphsToolStripMenuItem.Text = "Graphs";
             this.graphsToolStripMenuItem.Click += new System.EventHandler(this.graphsToolStripMenuItem_Click);
             // 
+            // idkControlsToolStripMenuItem
+            // 
+            this.idkControlsToolStripMenuItem.Name = "idkControlsToolStripMenuItem";
+            this.idkControlsToolStripMenuItem.Size = new System.Drawing.Size(81, 20);
+            this.idkControlsToolStripMenuItem.Text = "idk controls";
+            this.idkControlsToolStripMenuItem.Click += new System.EventHandler(this.idkControlsToolStripMenuItem_Click);
+            // 
             // tbInputID
             // 
             this.tbInputID.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bsIOSource, "inputID", true));
@@ -372,7 +337,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(425, 242);
+            this.label3.Location = new System.Drawing.Point(425, 209);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(31, 13);
             this.label3.TabIndex = 29;
@@ -381,7 +346,7 @@
             // tbPitch
             // 
             this.tbPitch.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bsIOSource, "pitch", true));
-            this.tbPitch.Location = new System.Drawing.Point(428, 258);
+            this.tbPitch.Location = new System.Drawing.Point(428, 225);
             this.tbPitch.Name = "tbPitch";
             this.tbPitch.Size = new System.Drawing.Size(126, 20);
             this.tbPitch.TabIndex = 6;
@@ -390,7 +355,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(425, 179);
+            this.label2.Location = new System.Drawing.Point(425, 147);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(46, 13);
             this.label2.TabIndex = 27;
@@ -399,7 +364,7 @@
             // tbPanning
             // 
             this.tbPanning.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bsIOSource, "panning", true));
-            this.tbPanning.Location = new System.Drawing.Point(428, 195);
+            this.tbPanning.Location = new System.Drawing.Point(428, 163);
             this.tbPanning.Name = "tbPanning";
             this.tbPanning.Size = new System.Drawing.Size(126, 20);
             this.tbPanning.TabIndex = 5;
@@ -408,7 +373,7 @@
             // lblVolume
             // 
             this.lblVolume.AutoSize = true;
-            this.lblVolume.Location = new System.Drawing.Point(425, 125);
+            this.lblVolume.Location = new System.Drawing.Point(425, 108);
             this.lblVolume.Name = "lblVolume";
             this.lblVolume.Size = new System.Drawing.Size(42, 13);
             this.lblVolume.TabIndex = 25;
@@ -426,7 +391,7 @@
             // tbVolume
             // 
             this.tbVolume.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bsIOSource, "volume", true));
-            this.tbVolume.Location = new System.Drawing.Point(428, 141);
+            this.tbVolume.Location = new System.Drawing.Point(428, 124);
             this.tbVolume.Name = "tbVolume";
             this.tbVolume.Size = new System.Drawing.Size(126, 20);
             this.tbVolume.TabIndex = 4;
@@ -511,7 +476,7 @@
             // lblDelay_smpl
             // 
             this.lblDelay_smpl.AutoSize = true;
-            this.lblDelay_smpl.Location = new System.Drawing.Point(425, 74);
+            this.lblDelay_smpl.Location = new System.Drawing.Point(425, 69);
             this.lblDelay_smpl.Name = "lblDelay_smpl";
             this.lblDelay_smpl.Size = new System.Drawing.Size(67, 13);
             this.lblDelay_smpl.TabIndex = 36;
@@ -520,7 +485,7 @@
             // tbDelay_smpl
             // 
             this.tbDelay_smpl.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bsIOSource, "delay_smpl", true));
-            this.tbDelay_smpl.Location = new System.Drawing.Point(428, 93);
+            this.tbDelay_smpl.Location = new System.Drawing.Point(428, 85);
             this.tbDelay_smpl.Name = "tbDelay_smpl";
             this.tbDelay_smpl.Size = new System.Drawing.Size(126, 20);
             this.tbDelay_smpl.TabIndex = 35;
@@ -529,7 +494,7 @@
             // cbStereoInput
             // 
             this.cbStereoInput.AutoSize = true;
-            this.cbStereoInput.Location = new System.Drawing.Point(418, 221);
+            this.cbStereoInput.Location = new System.Drawing.Point(418, 189);
             this.cbStereoInput.Name = "cbStereoInput";
             this.cbStereoInput.Size = new System.Drawing.Size(146, 17);
             this.cbStereoInput.TabIndex = 37;
@@ -552,18 +517,94 @@
             this.tbOSamp.TabIndex = 39;
             this.tbOSamp.Text = "4";
             // 
-            // idkControlsToolStripMenuItem
+            // dataColumn3
             // 
-            this.idkControlsToolStripMenuItem.Name = "idkControlsToolStripMenuItem";
-            this.idkControlsToolStripMenuItem.Size = new System.Drawing.Size(81, 20);
-            this.idkControlsToolStripMenuItem.Text = "idk controls";
-            this.idkControlsToolStripMenuItem.Click += new System.EventHandler(this.idkControlsToolStripMenuItem_Click);
+            this.dataColumn3.Caption = "Limit";
+            this.dataColumn3.ColumnName = "limit";
+            this.dataColumn3.DataType = typeof(float);
+            this.dataColumn3.DefaultValue = 1F;
+            // 
+            // inputIDDataGridViewTextBoxColumn
+            // 
+            this.inputIDDataGridViewTextBoxColumn.DataPropertyName = "inputID";
+            this.inputIDDataGridViewTextBoxColumn.HeaderText = "inputID";
+            this.inputIDDataGridViewTextBoxColumn.Name = "inputIDDataGridViewTextBoxColumn";
+            this.inputIDDataGridViewTextBoxColumn.Width = 285;
+            // 
+            // outputIDDataGridViewTextBoxColumn
+            // 
+            this.outputIDDataGridViewTextBoxColumn.DataPropertyName = "outputID";
+            this.outputIDDataGridViewTextBoxColumn.HeaderText = "outputID";
+            this.outputIDDataGridViewTextBoxColumn.Name = "outputIDDataGridViewTextBoxColumn";
+            this.outputIDDataGridViewTextBoxColumn.Width = 285;
+            // 
+            // delay
+            // 
+            this.delay.DataPropertyName = "delay";
+            this.delay.HeaderText = "delay (ms)";
+            this.delay.Name = "delay";
+            this.delay.Width = 50;
+            // 
+            // delay_smpl
+            // 
+            this.delay_smpl.DataPropertyName = "delay_smpl";
+            this.delay_smpl.HeaderText = "delay (smpl.)";
+            this.delay_smpl.Name = "delay_smpl";
+            this.delay_smpl.Width = 80;
+            // 
+            // volumeDataGridViewTextBoxColumn
+            // 
+            this.volumeDataGridViewTextBoxColumn.DataPropertyName = "volume";
+            this.volumeDataGridViewTextBoxColumn.HeaderText = "volume";
+            this.volumeDataGridViewTextBoxColumn.Name = "volumeDataGridViewTextBoxColumn";
+            this.volumeDataGridViewTextBoxColumn.Width = 60;
+            // 
+            // panningDataGridViewTextBoxColumn
+            // 
+            this.panningDataGridViewTextBoxColumn.DataPropertyName = "panning";
+            this.panningDataGridViewTextBoxColumn.HeaderText = "panning";
+            this.panningDataGridViewTextBoxColumn.Name = "panningDataGridViewTextBoxColumn";
+            this.panningDataGridViewTextBoxColumn.Width = 60;
+            // 
+            // pitchDataGridViewTextBoxColumn
+            // 
+            this.pitchDataGridViewTextBoxColumn.DataPropertyName = "pitch";
+            this.pitchDataGridViewTextBoxColumn.HeaderText = "pitch";
+            this.pitchDataGridViewTextBoxColumn.Name = "pitchDataGridViewTextBoxColumn";
+            this.pitchDataGridViewTextBoxColumn.Width = 50;
+            // 
+            // limit
+            // 
+            this.limit.DataPropertyName = "limit";
+            this.limit.HeaderText = "limit";
+            this.limit.Name = "limit";
+            this.limit.Width = 50;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(425, 248);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(28, 13);
+            this.label1.TabIndex = 41;
+            this.label1.Text = "Limit";
+            // 
+            // tbLimit
+            // 
+            this.tbLimit.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bsIOSource, "pitch", true));
+            this.tbLimit.Location = new System.Drawing.Point(428, 264);
+            this.tbLimit.Name = "tbLimit";
+            this.tbLimit.Size = new System.Drawing.Size(126, 20);
+            this.tbLimit.TabIndex = 40;
+            this.tbLimit.Text = "1";
             // 
             // formMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(987, 708);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.tbLimit);
             this.Controls.Add(this.tbOSamp);
             this.Controls.Add(this.tbFFTSize);
             this.Controls.Add(this.cbStereoInput);
@@ -650,21 +691,25 @@
         private System.Windows.Forms.ProgressBar pbVolume;
         private System.Windows.Forms.Timer timer10ms;
         private System.Data.DataColumn dataColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn delay;
-        private System.Windows.Forms.DataGridViewTextBoxColumn delay_smpl;
         private System.Windows.Forms.Label lblDelay_smpl;
         private System.Windows.Forms.TextBox tbDelay_smpl;
-        private System.Windows.Forms.DataGridViewTextBoxColumn inputIDDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn outputIDDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn volumeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn panningDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn pitchDataGridViewTextBoxColumn;
         private System.Windows.Forms.ToolStripMenuItem graphsToolStripMenuItem;
         private System.Windows.Forms.CheckBox cbStereoInput;
         private System.Windows.Forms.ToolStripMenuItem equalizerToolStripMenuItem;
         private System.Windows.Forms.TextBox tbFFTSize;
         private System.Windows.Forms.TextBox tbOSamp;
         private System.Windows.Forms.ToolStripMenuItem idkControlsToolStripMenuItem;
+        private System.Data.DataColumn dataColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn inputIDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn outputIDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn delay;
+        private System.Windows.Forms.DataGridViewTextBoxColumn delay_smpl;
+        private System.Windows.Forms.DataGridViewTextBoxColumn volumeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn panningDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn pitchDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn limit;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox tbLimit;
     }
 }
 
